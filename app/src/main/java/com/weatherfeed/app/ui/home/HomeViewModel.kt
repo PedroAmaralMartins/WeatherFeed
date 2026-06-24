@@ -1,4 +1,6 @@
 package com.weatherfeed.app.ui.home
 
-class HomeViewModel {
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel : ViewModel(){
 }
