@@ -9,7 +9,7 @@ android {
         version = release(36)
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 
