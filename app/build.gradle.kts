@@ -1,3 +1,7 @@
+import org.jetbrains.kotlin.fir.declarations.builder.buildConstructor
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -11,6 +15,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 
     defaultConfig {
@@ -21,6 +26,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        val properties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()){
+            properties.load(FileInputStream(localPropertiesFile))
+        }
+        val apikey = properties.getProperty("WEATHER_API_KEY") ?: "\"CHAVE_NAO_ENCONTRADA\""
+
+        buildConfigField("String","WEATHER_API_KEY",apikey)
     }
 
     buildTypes {
