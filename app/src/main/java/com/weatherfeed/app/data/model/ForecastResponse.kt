@@ -1,4 +1,4 @@
-package com.weatherfeed.data.model
+package com.weatherfeed.app.data.model
 
 data class ForecastResponse(
     val list: List<String>,
