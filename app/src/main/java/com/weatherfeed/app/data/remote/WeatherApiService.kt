@@ -6,9 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApiService {
-
     @GET("data/2.5/weather")
-
     suspend fun getCurrentWeather(
         @Query("lat") lat : Double,
         @Query("lon") lon : Double,
@@ -17,7 +15,6 @@ interface WeatherApiService {
             WeatherResponse
 
     @GET("data/2.5/forecast")
-
     suspend fun getForecast(
         @Query("lat") lat : Double,
         @Query("lon") lon : Double,
@@ -26,7 +23,6 @@ interface WeatherApiService {
             ForecastResponse
 
     @GET("data/2.5/weather")
-
     suspend fun searchCity(
         @Query("q") city : String,
         @Query("appid") key : String,
