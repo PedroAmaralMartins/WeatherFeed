@@ -3,18 +3,22 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="Inicio"/>
+        android:title="Inicio"
+        android:icon="@drawable/ic_home"/>
 
     <item
         android:id="@+id/forecastFragment"
-        android:title="Previsão"/>
+        android:title="Previsão"
+        android:icon="@drawable/ic_cloud"/>
 
     <item
         android:id="@+id/searchFragment"
-        android:title="Procurar"/>
+        android:title="Procurar"
+        android:icon="@drawable/ic_search"/>
 
     <item
         android:id="@+id/settingsFragment"
-        android:title="Configurações"/>
+        android:title="Configurações"
+        android:icon="@drawable/ic_settings"/>
 
 </menu>
