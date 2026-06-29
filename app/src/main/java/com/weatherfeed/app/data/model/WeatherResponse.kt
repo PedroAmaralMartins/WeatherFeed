@@ -13,7 +13,7 @@ data class WeatherResponse(
 data class Main(
     val temp: Double,
     @SerializedName("feels_like")
-    val feelslike: Double,
+    val feelsLike: Double,
     val humidity: Int
 )
 

@@ -9,15 +9,15 @@ data class ForecastResponse(
 
 data class ForecastItem(
     val dt: Long,
-    val main: Main,
+    val main: ForecastMain,
     val weather: List<WeatherDesc>
 )
 
 data class ForecastMain(
     @SerializedName("temp_max")
     val tempMax: Double,
-    @SerializedName("tem_min")
-    val temMin: Double
+    @SerializedName("temp_min")
+    val tempMin: Double
 )
 
 data class City(
