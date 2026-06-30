@@ -25,7 +25,6 @@ class WeatherRepository(
     }
 
     suspend fun searchCity(cityName: String): Result<WeatherResponse> {
-
         return try {
             Result.success(api.searchCity(cityName))
         } catch (e: Exception) {
