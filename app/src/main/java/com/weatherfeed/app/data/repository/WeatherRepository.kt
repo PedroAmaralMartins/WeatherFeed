@@ -31,6 +31,4 @@ class WeatherRepository(
             Result.failure(e)
         }
     }
-
-
 }
