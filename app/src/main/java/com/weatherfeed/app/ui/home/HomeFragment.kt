@@ -25,7 +25,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         checkLocationPermission()
 
-        Toast.makeText(requireContext(), "Home aberta", Toast.LENGTH_SHORT).show()
     }
 
     private fun checkLocationPermission() {
@@ -54,7 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun showPermissionDeniedMessage() {
         Toast.makeText(
             requireContext(),
-            "Localização permitida",
+            "Permissão de localização negada",
             Toast.LENGTH_SHORT
         ).show()
     }
