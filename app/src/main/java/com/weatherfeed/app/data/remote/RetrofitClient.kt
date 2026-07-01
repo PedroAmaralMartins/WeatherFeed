@@ -10,7 +10,7 @@ object RetrofitClient {
     private const val BASE_URL = "https://api.openweathermap.org/"
     private val API_KEY = BuildConfig.WEATHER_API_KEY
 
-    val okHTTp = OkHttpClient.Builder().addInterceptor { chain ->
+    private val okHttp = OkHttpClient.Builder().addInterceptor { chain ->
         val url = chain.request().url().newBuilder()
             .addQueryParameter("appid", API_KEY)
             .build()
@@ -19,9 +19,10 @@ object RetrofitClient {
         .build()
 
 
-    val api: WeatherApiService by lazy {
+    internal val api: WeatherApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WeatherApiService::class.java)
