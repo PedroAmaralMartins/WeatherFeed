@@ -9,9 +9,7 @@ plugins {
 
 android {
     namespace = "com.weatherfeed.app"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     buildFeatures {
         viewBinding = true

@@ -1,22 +1,26 @@
 package com.weatherfeed.app.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class ForecastResponse(
-    val list: List<String>,
+    val list: List<ForecastItem>,
     val city: City
 )
 
 data class ForecastItem(
-    val dt_txt: String,
+    val dt: Long,
     val main: ForecastMain,
-    val weather: List<String>
+    val weather: List<WeatherDesc>
 )
 
 data class ForecastMain(
-    val temp_max: Double,
-    val tem_min: Double
+    @SerializedName("temp_max")
+    val tempMax: Double,
+    @SerializedName("temp_min")
+    val tempMin: Double
 )
 
 data class City(
-    val nome: String,
+    val name: String,
     val country: String
 )

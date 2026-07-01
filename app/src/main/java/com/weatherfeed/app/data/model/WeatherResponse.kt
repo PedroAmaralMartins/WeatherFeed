@@ -1,21 +1,24 @@
 package com.weatherfeed.app.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class WeatherResponse(
     val name: String,
     val main: Main,
-    val weather: List<String>,
+    val weather: List<WeatherDesc>,
     val wind: Wind,
     val coord: Coord
 )
 
 data class Main(
     val temp: Double,
-    val feels_like: Double,
+    @SerializedName("feels_like")
+    val feelsLike: Double,
     val humidity: Int
 )
 
 data class WeatherDesc(
-    val Description: String,
+    val description: String,
     val icon: String
 )
 
