@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Início"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/forecastFragment"
+        android:title="Previsão"
+        android:icon="@drawable/ic_cloud"/>
+
+    <item
+        android:id="@+id/searchFragment"
+        android:title="Procurar"
+        android:icon="@drawable/ic_search"/>
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="Configurações"
+        android:icon="@drawable/ic_settings"/>
+
+</menu>
