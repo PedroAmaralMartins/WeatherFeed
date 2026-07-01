@@ -30,10 +30,11 @@ class MainActivity : AppCompatActivity() {
         configureNavigation()
     }
 
-   private fun configureNavigation() {
-       val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-       val navController = navHostFragment.navController
-       val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-       bottomNavigationView.setupWithNavController(navController)
-   }
+    private fun configureNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.setupWithNavController(navController)
+    }
 }
