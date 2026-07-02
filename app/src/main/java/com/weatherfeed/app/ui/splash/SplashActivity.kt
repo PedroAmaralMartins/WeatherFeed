@@ -2,8 +2,6 @@ package com.weatherfeed.app.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.weatherfeed.app.MainActivity
