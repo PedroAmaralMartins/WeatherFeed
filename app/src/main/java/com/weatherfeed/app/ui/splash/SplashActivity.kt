@@ -20,9 +20,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.icFirstScreen.alpha = 0f
+        binding.tvSplashLogo.alpha = 0f
         binding.titleFirstScreen.alpha = 0f
-        binding.icFirstScreen.animate().alpha(1f).setDuration(800).start()
+        binding.tvSplashLogo.animate().alpha(1f).setDuration(800).start()
         binding.titleFirstScreen.animate().alpha(1f).setStartDelay(400).setDuration(600).start()
 
         lifecycleScope.launch {
