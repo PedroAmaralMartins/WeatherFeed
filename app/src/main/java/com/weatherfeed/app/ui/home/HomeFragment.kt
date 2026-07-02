@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.weatherfeed.app.R
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -27,7 +25,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkLocationPermission()
+
     }
 
     private fun checkLocationPermission() {
@@ -46,8 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getLocation() {
-        fusedLocationProviderClient
-            //TODO
+        //TODO: implementar com fusedLocationProviderClient.lastLocation
         }
 
 
