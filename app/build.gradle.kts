@@ -73,4 +73,6 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
+
+    implementation("com.github.veronezzi:weatherfeed-design-system:1.1.0")
 }
