@@ -74,5 +74,7 @@ dependencies {
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
 
-    implementation("com.github.veronezzi:weatherfeed-design-system:1.1.0")
+    implementation(libs.weather.design.system)
+
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

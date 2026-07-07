@@ -17,6 +17,8 @@ navigation = "2.7.6"
 glide = "4.16.0"
 location = "21.1.0"
 
+weatherDesignSystem = "1.1.0"
+
 
 
 [libraries]
@@ -28,7 +30,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
+weather-design-system= {group = "com.github.veronezzi", name = "weatherfeed-design-system", version.ref = "weatherDesignSystem"}
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 

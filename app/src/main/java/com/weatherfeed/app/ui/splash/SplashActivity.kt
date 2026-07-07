@@ -3,6 +3,7 @@ package com.weatherfeed.app.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.databinding.ActivitySplashBinding
@@ -15,6 +16,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -24,13 +26,6 @@ class SplashActivity : AppCompatActivity() {
         binding.titleFirstScreen.animate().alpha(1f).setStartDelay(400).setDuration(600).start()
 
         lifecycleScope.launch {
-            delay(2200)
-            startActivity(
-                Intent(
-                    this@SplashActivity,
-                    MainActivity::class.java
-                )
-            )
             finish()
         }
     }
