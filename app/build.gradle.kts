@@ -63,6 +63,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.core.splashscreen)
     
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
@@ -75,6 +76,4 @@ dependencies {
     implementation(libs.play.services.location)
 
     implementation(libs.weather.design.system)
-
-    implementation("androidx.core:core-splashscreen:1.0.1")
 }

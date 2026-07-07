@@ -18,6 +18,7 @@ glide = "4.16.0"
 location = "21.1.0"
 
 weatherDesignSystem = "1.1.0"
+coreSplashscreen = "1.0.1"
 
 
 
@@ -44,6 +45,8 @@ navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", ver
 
 glide-core = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
+
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -23,6 +23,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:itemIconTint="@color/bottom_nav_colors"
         app:itemTextColor="@color/bottom_nav_colors"
         app:labelVisibilityMode="labeled"
@@ -31,5 +32,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <include
+        android:id="@+id/splashLayout"
+        layout="@layout/activity_splash"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
