@@ -23,7 +23,6 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         app:itemIconTint="@color/bottom_nav_colors"
         app:itemTextColor="@color/bottom_nav_colors"
         app:labelVisibilityMode="labeled"
