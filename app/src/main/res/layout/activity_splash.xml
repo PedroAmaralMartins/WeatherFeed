@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/application_startup_background">
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_splash_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🌤"
-        android:textSize="200sp"
+        android:src="@drawable/ic_sun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
