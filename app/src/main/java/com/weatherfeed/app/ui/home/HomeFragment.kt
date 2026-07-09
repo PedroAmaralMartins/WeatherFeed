@@ -16,15 +16,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
-
-        checkLocationPermission()
-    }
-
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
             val fineGranted = permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
@@ -36,6 +27,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 showPermissionDeniedMessage()
             }
         }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        checkLocationPermission()
+    }
+
 
     private fun checkLocationPermission() {
         val hasFine = ContextCompat.checkSelfPermission(
@@ -73,16 +73,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             return
         }
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                val latitude = location.latitude
-                val longitude = location.longitude
-
-                Toast.makeText(
-                    requireContext(),
-                    "localizado! Lat: $latitude, Lon: $longitude",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
+            if (!isAdded) return@addOnSuccessListener
+            else {
                 Toast.makeText(
                     requireContext(),
                     text,
@@ -91,7 +83,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
-
 
     private fun showPermissionDeniedMessage() {
         val text = getString(R.string.location_denied)
