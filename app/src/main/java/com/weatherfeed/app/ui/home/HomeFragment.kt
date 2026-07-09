@@ -130,6 +130,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showPermissionDeniedMessage() {
         val text = getString(R.string.location_permission_denied)
+        if (!isAdded) return
         Toast.makeText(
             requireContext(),
             text,
@@ -155,7 +156,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onStop() {
         super.onStop()
-        fusedLocationClient.removeLocationUpdates (locationCallback)
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 }
 
