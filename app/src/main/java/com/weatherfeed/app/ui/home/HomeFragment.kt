@@ -74,6 +74,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (!isAdded) return@addOnSuccessListener
+            if (location != null){
+                // TODO: atualizar UI via ViewModel com location.latitude / location.longitude
+            }
             else {
                 Toast.makeText(
                     requireContext(),
