@@ -16,7 +16,7 @@ lifecycle = "2.7.0"
 navigation = "2.7.6"
 glide = "4.16.0"
 location = "21.1.0"
-
+weatherfeed-design-system = "1.1.0"
 
 
 [libraries]
@@ -43,6 +43,7 @@ navigation-ui = { group = "androidx.navigation", name = "navigation-ui-ktx", ver
 glide-core = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 
+weatherfeed-design-system = { module = "com.github.veronezzi:weatherfeed-design-system", version.ref = "weatherfeed-design-system" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

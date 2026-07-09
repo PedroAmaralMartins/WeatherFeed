@@ -10,6 +10,6 @@ class PrefsManager(context: Context) {
         set(value) = prefs.edit().putLong("last_latitude", value.toBits()).apply()
 
     var lastLongitude: Double
-        get() = prefs.getFloat("last_longitude", 0.0f).toDouble()
-        set(value) = prefs.edit().putFloat("last_longitude", value.toFloat()).apply()
+        get() = Double.fromBits( prefs.getLong("last_longitude", 0L))
+        set(value) = prefs.edit().putLong("last_longitude", value.toBits()).apply()
 }

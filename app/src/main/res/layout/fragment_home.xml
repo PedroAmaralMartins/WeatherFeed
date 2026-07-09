@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.weather.designsystem.xml.WeatherTopBarView
+    <FrameLayout
         android:id="@+id/top_bar"
-        style="@style/WeatherText.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_weather_card"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </com.weather.designsystem.xml.WeatherTopBarView>
+        <com.weather.designsystem.xml.WeatherTopBarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 
     <com.weather.designsystem.xml.WeatherStatCardView
         android:id="@+id/weather_Status"

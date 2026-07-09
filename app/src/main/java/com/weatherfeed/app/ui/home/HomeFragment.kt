@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -104,7 +105,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 ).show()
                 requestFreshLocation()
             } catch (e: Exception) {
-                println("Erro ao obter localização : ${e.message}")
+                Log.e("HomeFragment", "Erro ao obter localizacao: ${e.message}", e)
                 requestFreshLocation()
             }
         }
@@ -154,7 +155,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onStop() {
         super.onStop()
-        fusedLocationClient.removeLocationUpdates { locationCallback }
+        fusedLocationClient.removeLocationUpdates (locationCallback)
     }
 }
 
