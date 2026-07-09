@@ -23,27 +23,32 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        startAnimations()
+        if (savedInstanceState == null) {
+            startAnimations()
+        } else {
+            navigatieToMain()
+        }
+
     }
 
     private fun startAnimations() {
-
-        binding.tvSplashLogo.alpha = 0f
+        binding.ivSplashLogo.alpha = 0f
         binding.titleFirstScreen.alpha = 0f
 
-        binding.tvSplashLogo.animate().alpha(1f).setDuration(800).start()
-
+        binding.ivSplashLogo.animate().alpha(1f).setDuration(800).start()
         binding.titleFirstScreen.animate().alpha(1f).setStartDelay(400).setDuration(600).start()
 
         lifecycleScope.launch {
-
             delay(SPLASH_DURATION_MS)
-
             startActivity(
                 Intent(this@SplashActivity, MainActivity::class.java)
             )
-
             finish()
         }
+    }
+
+    private fun navigatieToMain() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }
