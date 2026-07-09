@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             startAnimations()
         } else {
-            navigatieToMain()
+            navigateToMain()
         }
 
     }
@@ -47,7 +47,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigatieToMain() {
+    private fun navigateToMain() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
