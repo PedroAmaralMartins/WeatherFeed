@@ -16,6 +16,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        checkLocationPermission()
+    }
+
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permission ->
             val fineGranted = permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
@@ -27,15 +36,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 showPermissionDeniedMessage()
             }
         }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
-
-        checkLocationPermission()
-    }
 
     private fun checkLocationPermission() {
         val hasFine = ContextCompat.checkSelfPermission(
@@ -60,6 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getLocation() {
+        val text = getString(R.string.not_located)
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -78,13 +79,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 Toast.makeText(
                     requireContext(),
-                    "Localizado! Lat: $latitude, Lon: $longitude",
+                    "localizado! Lat: $latitude, Lon: $longitude",
                     Toast.LENGTH_LONG
                 ).show()
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Não foi possível obter a última localização.",
+                    text,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -93,9 +94,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
     private fun showPermissionDeniedMessage() {
+        val text = getString(R.string.location_denied)
+        if (!isAdded) return
+
         Toast.makeText(
             requireContext(),
-            "Permissão de localização negada",
+            text,
             Toast.LENGTH_SHORT
         ).show()
     }
