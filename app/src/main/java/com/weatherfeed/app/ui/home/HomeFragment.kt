@@ -3,6 +3,7 @@ package com.weatherfeed.app.ui.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
@@ -11,14 +12,25 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.weatherfeed.app.R
 import com.weatherfeed.app.utils.PrefsManager
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeout
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+    companion object {
+        private const val LOCATION_TIMEOUT_MS = 5000L
+    }
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
 
@@ -49,8 +61,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        checkLocationPermission()
+        prefsManager = PrefsManager(requireContext())
 
+        checkLocationPermission()
     }
 
     private fun checkLocationPermission() {
@@ -70,27 +83,61 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @SuppressLint("MissingPermission")
     private fun getLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                prefsManager.lastLatitude = location.latitude
-                prefsManager.lastLongitude = location.longitude
-                viewModel.loadWeather(location.latitude, location.longitude)
-            } else {
-                requestFlashLocation()
+        val textError = getString(R.string.location_took_time)
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val location = withTimeout(LOCATION_TIMEOUT_MS) {
+                    getLastLocation()
+                }
+                if (location != null) {
+                    prefsManager.lastLatitude = location.latitude
+                    prefsManager.lastLongitude = location.longitude
+                    viewModel.loadWeather(location.latitude, location.longitude)
+                } else {
+                    requestFreshLocation()
+                }
+            } catch (e: TimeoutCancellationException) {
+                Toast.makeText(
+                    requireContext(),
+                    textError,
+                    Toast.LENGTH_SHORT
+                ).show()
+                requestFreshLocation()
+            } catch (e: Exception) {
+                println("Erro ao obter localização : ${e.message}")
+                requestFreshLocation()
             }
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private suspend fun getLastLocation(): Location? =
+        suspendCancellableCoroutine { continuation ->
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (continuation.isActive) {
+                        continuation.resume(location)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    if (continuation.isActive) {
+                        continuation.resumeWithException(exception)
+                    }
+                }
+
+        }
+
     private fun showPermissionDeniedMessage() {
+        val text = getString(R.string.location_permission_denied)
         Toast.makeText(
             requireContext(),
-            "Permissão de localização negada",
+            text,
             Toast.LENGTH_SHORT
         ).show()
     }
 
     @SuppressLint("MissingPermission")
-    private fun requestFlashLocation() {
+    private fun requestFreshLocation() {
         val request = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
             1000L
@@ -103,6 +150,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             locationCallback,
             Looper.getMainLooper()
         )
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fusedLocationClient.removeLocationUpdates { locationCallback }
     }
 }
 
