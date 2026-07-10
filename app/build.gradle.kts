@@ -75,5 +75,5 @@ dependencies {
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
 
-    implementation(libs.weather.design.system)
+    implementation(libs.weatherfeed.design.system)
 }
