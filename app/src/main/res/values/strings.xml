@@ -1,4 +1,4 @@
 <resources>
-    <style name="error_loading_weather">Erro ao carregar o clima</style>
+    <string name="error_loading_weather">Erro ao carregar o clima</string>
     <string name="app_name">WeatherFeed</string>
 </resources>

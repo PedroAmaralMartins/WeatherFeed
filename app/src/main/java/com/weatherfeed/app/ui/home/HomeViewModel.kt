@@ -15,12 +15,12 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow<WeatherUiState>(WeatherUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    fun loeadWeather(lat: Double, lon: Double) {
+    fun loadWeather(lat: Double, lon: Double) {
         viewModelScope.launch {
             _uiState.value = WeatherUiState.Loading
             repository.getCurrentWeather(lat, lon)
                 .onSuccess { _uiState.value = WeatherUiState.Success(it) }
-                .onFailure { _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima" ) }
+                .onFailure { _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima") }
         }
     }
 }
