@@ -63,6 +63,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.core.splashscreen)
     
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
@@ -73,4 +74,6 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
+
+    implementation(libs.weatherfeed.design.system)
 }
