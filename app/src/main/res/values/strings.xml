@@ -1,5 +1,5 @@
 <resources>
+    <string name="location_took_time">A localização demorou demais para responder.</string>
     <string name="app_name">WeatherFeed</string>
-    <string name="not_located">Não foi possível obter a última localização.</string>
-    <string name="location_denied">Permissão de localização negada.</string>
+    <string name="location_permission_denied">Permissão de localização negada</string>
 </resources>
