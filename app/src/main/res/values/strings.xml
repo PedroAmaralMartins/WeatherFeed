@@ -5,4 +5,7 @@
     <string name="location_permission_denied">Permissão de localização negada</string>
     <string name="error_loading">Http 401</string>
     <string name="btn_error_menssage">Tentar novamente</string>
+    <string name="tv_temperature">24°</string>
+    <string name="tv_condition">Parcialmente nublado</string>
+    <string name="tv_feels_like">Sensação térmica 26°C</string>
 </resources>
