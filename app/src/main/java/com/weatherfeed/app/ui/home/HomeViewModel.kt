@@ -1,7 +1,5 @@
 package com.weatherfeed.app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -10,9 +8,11 @@ import com.weatherfeed.app.data.repository.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class HomeViewModel(
     private val repository: WeatherRepository
+
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<WeatherUiState>(WeatherUiState.Loading)
     val uiState = _uiState.asStateFlow()
@@ -22,7 +22,15 @@ class HomeViewModel(
             _uiState.value = WeatherUiState.Loading
             repository.getCurrentWeather(lat, lon)
                 .onSuccess { _uiState.value = WeatherUiState.Success(it) }
-                .onFailure { _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima") }
+                .onFailure { _uiState.value = WeatherUiState.Error(mapErrorMessage(it)) }
+        }
+    }
+
+    private fun mapErrorMessage(throwable: Throwable): String {
+        return if (throwable is HttpException) {
+            "Erro ${throwable.code()}"
+        } else {
+            "Erro 401"
         }
     }
 }

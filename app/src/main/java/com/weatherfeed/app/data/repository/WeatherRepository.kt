@@ -6,8 +6,9 @@ import com.weatherfeed.app.data.remote.WeatherApiService
 
 
 class WeatherRepository(
-    private val api: WeatherApiService
+    private val api : WeatherApiService
 ) {
+
     suspend fun getCurrentWeather(lat: Double, lon: Double): Result<WeatherResponse> {
         return try {
             Result.success(api.getCurrentWeather(lat, lon))

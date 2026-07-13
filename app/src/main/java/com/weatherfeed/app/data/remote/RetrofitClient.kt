@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-
     private const val BASE_URL = "https://api.openweathermap.org/"
     private val API_KEY = BuildConfig.WEATHER_API_KEY
 
@@ -19,12 +18,13 @@ object RetrofitClient {
         .build()
 
 
-    internal val api: WeatherApiService by lazy {
-        Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(WeatherApiService::class.java)
-    }
+
+    val api: WeatherApiService = retrofit.create(WeatherApiService::class.java)
 }
+
+

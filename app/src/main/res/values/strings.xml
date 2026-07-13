@@ -1,5 +1,8 @@
 <resources>
+    <string name="location_took_time">A localização demorou demais para responder</string>
     <string name="error_loading_weather">Erro ao carregar o clima</string>
     <string name="app_name">WeatherFeed</string>
     <string name="location_permission_denied">Permissão de localização negada</string>
+    <string name="error_loading">Http 401</string>
+    <string name="btn_error_menssage">Tentar novamente</string>
 </resources>
