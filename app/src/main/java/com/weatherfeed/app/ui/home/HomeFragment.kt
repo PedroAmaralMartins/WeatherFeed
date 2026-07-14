@@ -13,12 +13,21 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
+import com.weatherfeed.app.data.model.WeatherResponse
+import com.weatherfeed.app.databinding.FragmentHomeBinding
+import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
@@ -32,13 +41,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         private const val LOCATION_TIMEOUT_MS = 5000L
     }
 
+    private var _biding: FragmentHomeBinding? = null
+    private val binding get() = _biding!!
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(AppContainer.repository)
+    }
 
-    private val locationCallback = object : com.google.android.gms.location.LocationCallback() {
-        override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation = locationResult.lastLocation
             if (lastLocation != null) {
                 prefsManager.lastLatitude = lastLocation.latitude
@@ -67,9 +81,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         prefsManager = PrefsManager(requireContext())
 
-        checkLocationPermission()
-    }
+        _biding = FragmentHomeBinding.bind(view)
 
+        checkLocationPermission()
+
+        observeViewmodel()
+    }
 
     private fun checkLocationPermission() {
         val hasFine = ContextCompat.checkSelfPermission(
@@ -163,6 +180,67 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             locationCallback,
             Looper.getMainLooper()
         )
+    }
+
+    private fun observeViewmodel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+
+                    when (uiState) {
+
+                        is WeatherUiState.Loading -> {
+                            (requireActivity() as MainActivity).showLoading()
+                            binding.weatherStatus.visibility = View.GONE
+                        }
+
+                        is WeatherUiState.Success -> {
+                            (requireActivity() as MainActivity).hideLoading()
+
+                            showWeather(uiState.data)
+                        }
+
+                        is WeatherUiState.Error -> {
+                            (requireActivity() as MainActivity).hideLoading()
+                            binding.weatherStatus.visibility = View.GONE
+                            binding.errorContainer.visibility = View.VISIBLE
+                            binding.tvErrorMenssege.text = uiState.message
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showWeather(weather: WeatherResponse) {
+
+        binding.errorContainer.visibility = View.GONE
+        binding.weatherStatus.visibility = View.VISIBLE
+
+        binding.weatherStatus.setStat1(
+            "🌡",
+            "Sensação",
+            "${weather.main.feelsLike}"
+        )
+
+        binding.weatherStatus.setStat2(
+            "💧",
+            "Umidade",
+            "${weather.main.humidity}%"
+        )
+
+        binding.weatherStatus.setStat3(
+            "💨",
+            "Vento",
+            "${weather.wind.speed} km/h"
+        )
+
+        val iconUrl =
+            "https://openweathermap.org/img/wn/${weather.weather.firstOrNull()?.icon.orEmpty()}@2x.png"
+
+        Glide.with(requireContext())
+            .load(iconUrl)
+            .into(binding.ivWeatherIcon)
     }
 
     override fun onStop() {

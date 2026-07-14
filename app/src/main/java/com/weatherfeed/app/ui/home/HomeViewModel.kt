@@ -21,11 +21,13 @@ class HomeViewModel(
         viewModelScope.launch {
             _uiState.value = WeatherUiState.Loading
             repository.getCurrentWeather(lat, lon)
-                .onSuccess { _uiState.value = WeatherUiState.Success(it) }
-                .onFailure { _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima") }
+                .onSuccess { _uiState.value = WeatherUiState.Success(it) }.onFailure {
+                    _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima")
+                }
         }
     }
 }
+
 
 sealed class WeatherUiState {
     object Loading : WeatherUiState()

@@ -19,12 +19,11 @@ object RetrofitClient {
         .build()
 
 
-    internal val api: WeatherApiService by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(WeatherApiService::class.java)
-    }
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .client(okHttp)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val api: WeatherApiService = retrofit.create(WeatherApiService::class.java)
 }

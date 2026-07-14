@@ -9,7 +9,6 @@ appcompat = "1.7.1"
 material = "1.14.0"
 activity = "1.13.0"
 constraintlayout = "2.2.1"
-weatherfeedDesignSystem = "1.1.0"
 retrofit = "2.9.0"
 coroutines = "1.7.3"
 lifecycle = "2.7.0"
@@ -17,6 +16,7 @@ navigation = "2.7.6"
 glide = "4.16.0"
 location = "21.1.0"
 weatherfeed-design-system = "1.1.0"
+coreSplashscreen = "1.0.1"
 
 
 [libraries]
@@ -28,12 +28,11 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-weather-design-system = { group = "com.github.veronezzi", name = "weatherfeed-design-system", version.ref = "weatherDesignSystem" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
-
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 

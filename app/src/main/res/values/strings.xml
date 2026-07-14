@@ -2,4 +2,5 @@
     <string name="error_loading_weather">Erro ao carregar o clima</string>
     <string name="app_name">WeatherFeed</string>
     <string name="location_permission_denied">Permissão de localização negada</string>
+    <string name="location_took_time">Erro ao carregar a localização</string>
 </resources>
