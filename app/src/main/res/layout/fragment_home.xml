@@ -29,9 +29,9 @@
 
         <ImageView
             android:id="@+id/ivWeatherIcon"
+            android:contentDescription="@string/description_iv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_sun" />
     </LinearLayout>
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:gravity="center"
-        android:text="@string/tv_temperature"
+        tools:text="@string/preview_temperature"
         android:textColor="@color/white"
         android:textSize="@dimen/weather_text_display"
         android:textStyle="bold"
@@ -54,7 +54,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_condition"
+        tools:text="@string/preview_condition"
         android:textSize="@dimen/weather_text_title"
         android:textColor="@color/weather_text_primary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +66,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_feels_like"
+        tools:text="@string/preview_feels_like"
         android:textSize="@dimen/weather_text_body"
         android:textColor="@color/blue_70"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +78,8 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike" />
@@ -101,15 +101,15 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/ic_warning_error"
-            android:contentDescription="@string/error_loading"/>
+            android:contentDescription="@string/error_loading_iv"/>
 
         <TextView
-            android:id="@+id/tv_error_menssege"
+            android:id="@+id/tv_error_menssage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="@string/error_loading"
+            android:text="@string/error_loading_weather"
             android:textColor="@color/white"
             android:textAllCaps="true"
             android:textSize="16sp"/>

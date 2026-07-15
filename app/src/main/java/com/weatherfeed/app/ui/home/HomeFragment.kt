@@ -30,16 +30,18 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
+import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     companion object {
         private const val LOCATION_TIMEOUT_MS = 5000L
     }
 
-    private var _biding: FragmentHomeBinding? = null
-    private val binding get() = _biding!!
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
 
@@ -75,15 +77,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _biding = FragmentHomeBinding.bind(view)
-
+        _binding = FragmentHomeBinding.bind(view)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         prefsManager = PrefsManager(requireContext())
 
         binding.btnRetry.setOnClickListener {
-            viewModel.uiState
+            viewModel.loadWeather(
+                prefsManager.lastLatitude,
+                prefsManager.lastLongitude
+            )
         }
         checkLocationPermission()
 
@@ -185,6 +189,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
+    private fun mapErrorMessage(throwable: Throwable): String {
+        return if (throwable is IOException) {
+            getString(R.string.error_http_generic)
+        } else {
+            getString(R.string.error_loading_weather)
+        }
+    }
+
     private fun observeViewmodel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -192,16 +204,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     when (uiState) {
                         is WeatherUiState.Loading -> {
                             (requireActivity() as MainActivity).showLoading()
+                            binding.errorContainer.visibility = View.GONE
                             binding.weatherStatus.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
                             (requireActivity() as MainActivity).hideLoading()
                             val weather = uiState.data
+
+                            binding.topBar.setLocation(weather.name)
+                            binding.tvTemperature.text = getString(
+                                R.string.temperature,
+                                weather.main.temp.roundToInt()
+                            )
+
+                            binding.tvCondition.text = weather.weather[0].description
+
+                            binding.tvFeelsLike.text = getString(
+                                R.string.tv_feels_like,
+                                weather.main.feelsLike.roundToInt()
+                            )
+
+
                             binding.weatherStatus.setStat1(
                                 "🌡",
                                 "Sensação",
-                                "${weather.main.feelsLike}"
+                                "${weather.main.feelsLike.roundToInt()}"
                             )
 
                             binding.weatherStatus.setStat2(
@@ -212,16 +240,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             binding.weatherStatus.setStat3(
                                 "💨",
                                 "Vento",
-                                "${weather.wind.speed} km/h"
+                                "${(weather.wind.speed * 3.6).roundToInt()} km/h"
                             )
+                            binding.errorContainer.visibility = View.GONE
+                            binding.topBar.visibility = View.VISIBLE
+                            binding.tvTemperature.visibility = View.VISIBLE
+                            binding.tvCondition.visibility = View.VISIBLE
+                            binding.tvFeelsLike.visibility = View.VISIBLE
                             binding.weatherStatus.visibility = View.VISIBLE
+
                         }
 
                         is WeatherUiState.Error -> {
                             (requireActivity() as MainActivity).hideLoading()
                             binding.weatherStatus.visibility = View.GONE
+                            binding.tvErrorMenssage.text = mapErrorMessage(uiState.message)
                             binding.errorContainer.visibility = View.VISIBLE
-                            binding.tvErrorMenssege.text = uiState.message
                         }
                     }
                 }
@@ -237,7 +271,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         super.onDestroyView()
         fusedLocationClient.removeLocationUpdates(locationCallback)
-        _biding = null
+        _binding
     }
 
 }
