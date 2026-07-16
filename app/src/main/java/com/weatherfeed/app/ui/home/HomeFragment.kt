@@ -231,19 +231,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
                             binding.weatherStatus.setStat1(
-                                "🌡",
-                                "Sensação",
-                                "${weather.main.feelsLike.roundToInt()}"
+                                getString(R.string.ic_feels_like),
+                                getString(R.string.feels_like),
+                                "${weather.main.feelsLike.roundToInt()}°"
                             )
 
                             binding.weatherStatus.setStat2(
-                                "💧",
-                                "Umidade",
+                                getString(R.string.ic_humidity),
+                                getString(R.string.humidity),
                                 "${weather.main.humidity}%"
                             )
                             binding.weatherStatus.setStat3(
-                                "💨",
-                                "Vento",
+                                getString(R.string.ic_wind),
+                                getString(R.string.wind),
                                 "${(weather.wind.speed * 3.6).roundToInt()} km/h"
                             )
                             binding.errorContainer.visibility = View.GONE
