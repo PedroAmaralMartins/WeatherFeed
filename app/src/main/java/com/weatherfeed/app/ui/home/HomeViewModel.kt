@@ -1,7 +1,5 @@
 package com.weatherfeed.app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -21,9 +19,8 @@ class HomeViewModel(
         viewModelScope.launch {
             _uiState.value = WeatherUiState.Loading
             repository.getCurrentWeather(lat, lon)
-                .onSuccess { _uiState.value = WeatherUiState.Success(it) }.onFailure {
-                    _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima")
-                }
+                .onSuccess { _uiState.value = WeatherUiState.Success(it) }
+                .onFailure { _uiState.value = WeatherUiState.Error(it) }
         }
     }
 }
@@ -32,7 +29,7 @@ class HomeViewModel(
 sealed class WeatherUiState {
     object Loading : WeatherUiState()
     data class Success(val data: WeatherResponse) : WeatherUiState()
-    data class Error(val message: String) : WeatherUiState()
+    data class Error(val message: Throwable) : WeatherUiState()
 }
 
 class HomeViewModelFactory(

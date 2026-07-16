@@ -41,8 +41,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         private const val LOCATION_TIMEOUT_MS = 5000L
     }
 
-    private var _biding: FragmentHomeBinding? = null
-    private val binding get() = _biding!!
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
@@ -81,11 +81,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         prefsManager = PrefsManager(requireContext())
 
-        _biding = FragmentHomeBinding.bind(view)
+        _binding = FragmentHomeBinding.bind(view)
 
         checkLocationPermission()
 
-        observeViewmodel()
+        observeViewModel()
     }
 
     private fun checkLocationPermission() {
@@ -182,7 +182,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    private fun observeViewmodel() {
+    private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -191,7 +191,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                         is WeatherUiState.Loading -> {
                             (requireActivity() as MainActivity).showLoading()
-                            binding.weatherStatus.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
@@ -202,9 +201,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                         is WeatherUiState.Error -> {
                             (requireActivity() as MainActivity).hideLoading()
-                            binding.weatherStatus.visibility = View.GONE
-                            binding.errorContainer.visibility = View.VISIBLE
-                            binding.tvErrorMenssege.text = uiState.message
+
                         }
                     }
                 }
@@ -214,38 +211,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showWeather(weather: WeatherResponse) {
 
-        binding.errorContainer.visibility = View.GONE
-        binding.weatherStatus.visibility = View.VISIBLE
-
-        binding.weatherStatus.setStat1(
-            "🌡",
-            "Sensação",
-            "${weather.main.feelsLike}"
-        )
-
-        binding.weatherStatus.setStat2(
-            "💧",
-            "Umidade",
-            "${weather.main.humidity}%"
-        )
-
-        binding.weatherStatus.setStat3(
-            "💨",
-            "Vento",
-            "${weather.wind.speed} km/h"
-        )
-
         val iconUrl =
             "https://openweathermap.org/img/wn/${weather.weather.firstOrNull()?.icon.orEmpty()}@2x.png"
 
         Glide.with(requireContext())
             .load(iconUrl)
+            .placeholder(R.drawable.ic_sun)
+            .error(R.drawable.ic_sun)
             .into(binding.ivWeatherIcon)
     }
 
     override fun onStop() {
         super.onStop()
         fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding
     }
 }
 

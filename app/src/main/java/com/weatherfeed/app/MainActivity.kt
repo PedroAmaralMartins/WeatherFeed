@@ -1,6 +1,7 @@
 package com.weatherfeed.app
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,8 +40,24 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.setupWithNavController(navController)
+
+        val bottomNavigationView = binding.bottomNavigationView
+
+        bottomNavigationView.setOnItemSelected { index ->
+            when (index) {
+                0 -> navController.navigate(R.id.homeFragment)
+                1 -> navController.navigate(R.id.forecastFragment)
+                2 -> navController.navigate(R.id.searchFragment)
+                3 -> navController.navigate(R.id.settingsFragment)
+            }
+        }
     }
 
+    fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+    }
 }

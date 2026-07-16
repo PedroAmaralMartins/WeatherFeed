@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -28,12 +27,12 @@ android {
 
         val properties = Properties()
         val localPropertiesFile = rootProject.file("local.properties")
-        if (localPropertiesFile.exists()){
+        if (localPropertiesFile.exists()) {
             properties.load(FileInputStream(localPropertiesFile))
         }
         val rawKey = properties.getProperty("WEATHER_API_KEY") ?: "CHAVE_NAO_ENCONTRADA"
 
-        buildConfigField("String","WEATHER_API_KEY","\"$rawKey\"")
+        buildConfigField("String", "WEATHER_API_KEY", "\"$rawKey\"")
     }
 
     buildTypes {
@@ -73,6 +72,5 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.weatherfeed.design.system)
 }
