@@ -191,7 +191,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun mapErrorMessage(throwable: Throwable): String {
         return if (throwable is IOException) {
-            getString(R.string.error_http_generic)
+            getString(R.string.error_network)
         } else {
             getString(R.string.error_loading_weather)
         }
@@ -206,6 +206,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             (requireActivity() as MainActivity).showLoading()
                             binding.errorContainer.visibility = View.GONE
                             binding.weatherStatus.visibility = View.GONE
+                            binding.tvTemperature.visibility = View.GONE
+                            binding.tvCondition.visibility = View.GONE
+                            binding.tvFeelsLike.visibility = View.GONE
+                            binding.topBar.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
@@ -218,7 +222,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 weather.main.temp.roundToInt()
                             )
 
-                            binding.tvCondition.text = weather.weather[0].description
+                            binding.tvCondition.text = weather.weather.firstOrNull()?.description.orEmpty()
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,
@@ -254,7 +258,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         is WeatherUiState.Error -> {
                             (requireActivity() as MainActivity).hideLoading()
                             binding.weatherStatus.visibility = View.GONE
-                            binding.tvErrorMenssage.text = mapErrorMessage(uiState.message)
+                            binding.tvErrorMessage.text = mapErrorMessage(uiState.message)
                             binding.errorContainer.visibility = View.VISIBLE
                         }
                     }
@@ -271,7 +275,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         super.onDestroyView()
         fusedLocationClient.removeLocationUpdates(locationCallback)
-        _binding
+        _binding = null
     }
 
 }
