@@ -202,6 +202,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         is WeatherUiState.Error -> {
                             (requireActivity() as MainActivity).hideLoading()
 
+                            val text = getString(R.string.error_loading_weather)
+
+                            Toast.makeText(
+                                requireContext(),
+                                uiState.message.message ?: text,
+                                Toast.LENGTH_SHORT
+                            ).show()
+
                         }
                     }
                 }
@@ -226,9 +234,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 
