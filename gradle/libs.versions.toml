@@ -15,7 +15,7 @@ lifecycle = "2.7.0"
 navigation = "2.7.6"
 glide = "4.16.0"
 location = "21.1.0"
-weatherfeed-design-system = "1.1.0"
+weatherfeed-design-system = "1.3.0"
 coreSplashscreen = "1.0.1"
 
 

@@ -23,6 +23,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
 import com.weatherfeed.app.data.model.WeatherResponse
@@ -219,14 +220,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showWeather(weather: WeatherResponse) {
 
-        val iconUrl =
-            "https://openweathermap.org/img/wn/${weather.weather.firstOrNull()?.icon.orEmpty()}@2x.png"
-
-        Glide.with(requireContext())
-            .load(iconUrl)
-            .placeholder(R.drawable.ic_sun)
-            .error(R.drawable.ic_sun)
-            .into(binding.ivWeatherIcon)
+        val code = weather.weather.firstOrNull()?.icon.orEmpty()
+        binding.ivWeatherIcon.setImageResource(WeatherConditionIcons.fromOpenWeather(code))
+        binding.ivWeatherIcon.contentDescription = weather.weather.firstOrNull()?.description
     }
 
     override fun onStop() {
