@@ -22,7 +22,7 @@ interface WeatherApiService {
     ):
             ForecastResponse
 
-    @GET("data/2.5/direct")
+    @GET("data/2.5/weather")
     suspend fun searchCity(
         @Query("q") city: String,
         @Query("units") units: String = "metric"
