@@ -1,6 +1,5 @@
 package com.weatherfeed.app.ui.home
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -26,6 +25,7 @@ class HomeViewModel(
         }
     }
 }
+
 
 sealed class WeatherUiState {
     object Loading : WeatherUiState()

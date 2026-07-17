@@ -65,6 +65,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCondition" />
 
+    <ImageView
+        android:id="@+id/ivWeatherIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sun"
+        android:contentDescription="@string/description_iv"
+        app:layout_constraintBottom_toTopOf="@+id/weather_Status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
     <com.weather.designsystem.xml.WeatherStatCardView
         android:id="@+id/weather_Status"
         android:visibility="gone"

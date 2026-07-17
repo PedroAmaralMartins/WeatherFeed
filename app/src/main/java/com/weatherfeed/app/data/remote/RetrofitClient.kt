@@ -20,12 +20,10 @@ object RetrofitClient {
 
 
     private val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        .baseUrl(BASE_URL)
+        .client(okHttp)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
     val api: WeatherApiService = retrofit.create(WeatherApiService::class.java)
 }
-
-

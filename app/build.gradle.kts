@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -28,12 +27,13 @@ android {
 
         val properties = Properties()
         val localPropertiesFile = rootProject.file("local.properties")
-        if (localPropertiesFile.exists()){
+        if (localPropertiesFile.exists()) {
             properties.load(FileInputStream(localPropertiesFile))
         }
-        val rawKey = properties.getProperty("WEATHER_API_KEY") ?: "CHAVE_NAO_ENCONTRADA"
+        val rawKey = properties.getProperty("WEATHER_API_KEY")
+            ?: throw GradleException("WEATHER_API_KEY não encontrada no local.properties")
 
-        buildConfigField("String","WEATHER_API_KEY","\"$rawKey\"")
+        buildConfigField("String", "WEATHER_API_KEY", "\"$rawKey\"")
     }
 
     buildTypes {
@@ -64,7 +64,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.core.splashscreen)
-    
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
     implementation(libs.coroutines.android)
@@ -74,6 +73,5 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
-
     implementation(libs.weatherfeed.design.system)
 }

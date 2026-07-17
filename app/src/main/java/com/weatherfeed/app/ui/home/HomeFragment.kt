@@ -17,14 +17,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
-import com.weatherfeed.app.data.remote.RetrofitClient
-import com.weatherfeed.app.data.repository.WeatherRepository
+import com.weatherfeed.app.data.model.WeatherResponse
 import com.weatherfeed.app.databinding.FragmentHomeBinding
+import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
@@ -42,17 +45,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
 
-    private val viewModel: HomeViewModel by viewModels<HomeViewModel> {
-        HomeViewModelFactory(
-            WeatherRepository(RetrofitClient.api)
-        )
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(AppContainer.repository)
     }
 
-    private val locationCallback = object : com.google.android.gms.location.LocationCallback() {
-        override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
             val lastLocation = locationResult.lastLocation
             if (lastLocation != null) {
                 prefsManager.lastLatitude = lastLocation.latitude
@@ -94,6 +96,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observeViewmodel()
     }
 
+        observeViewModel()
+    }
 
     private fun checkLocationPermission() {
         val hasFine = ContextCompat.checkSelfPermission(
