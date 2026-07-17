@@ -14,11 +14,8 @@
     <string name="preview_feels_like">Sensação térmica: 27°C</string>
 
     <string name="feels_like">Sensação</string>
-    <string name="ic_feels_like">🌡</string>
-
-    <string name="ic_humidity">💧</string>
     <string name="humidity">Umidade</string>
-
-    <string name="ic_wind">💨</string>
     <string name="wind">vento</string>
+
+    <dimen name="margin_top_bottom">12dp</dimen>
 </resources>
