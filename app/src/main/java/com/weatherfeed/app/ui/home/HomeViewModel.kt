@@ -1,7 +1,6 @@
 package com.weatherfeed.app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -13,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val repository: WeatherRepository
+
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<WeatherUiState>(WeatherUiState.Loading)
     val uiState = _uiState.asStateFlow()
@@ -22,7 +22,7 @@ class HomeViewModel(
             _uiState.value = WeatherUiState.Loading
             repository.getCurrentWeather(lat, lon)
                 .onSuccess { _uiState.value = WeatherUiState.Success(it) }
-                .onFailure { _uiState.value = WeatherUiState.Error(it.message ?: "Erro ao carregar clima") }
+                .onFailure { _uiState.value = WeatherUiState.Error(it) }
         }
     }
 }
@@ -30,7 +30,7 @@ class HomeViewModel(
 sealed class WeatherUiState {
     object Loading : WeatherUiState()
     data class Success(val data: WeatherResponse) : WeatherUiState()
-    data class Error(val message: String) : WeatherUiState()
+    data class Error(val message: Throwable) : WeatherUiState()
 }
 
 class HomeViewModelFactory(

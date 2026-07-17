@@ -13,29 +13,43 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
+import com.weatherfeed.app.data.remote.RetrofitClient
+import com.weatherfeed.app.data.repository.WeatherRepository
+import com.weatherfeed.app.databinding.FragmentHomeBinding
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
+import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     companion object {
         private const val LOCATION_TIMEOUT_MS = 5000L
     }
 
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var prefsManager: PrefsManager
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels<HomeViewModel> {
+        HomeViewModelFactory(
+            WeatherRepository(RetrofitClient.api)
+        )
+    }
 
     private val locationCallback = object : com.google.android.gms.location.LocationCallback() {
         override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
@@ -63,11 +77,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        _binding = FragmentHomeBinding.bind(view)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         prefsManager = PrefsManager(requireContext())
 
+        binding.btnRetry.setOnClickListener {
+            viewModel.loadWeather(
+                prefsManager.lastLatitude,
+                prefsManager.lastLongitude
+            )
+        }
         checkLocationPermission()
+
+        observeViewmodel()
     }
 
 
@@ -165,9 +189,99 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
+    private fun mapErrorMessage(throwable: Throwable): String {
+        return if (throwable is IOException) {
+            getString(R.string.error_network)
+        } else {
+            getString(R.string.error_loading_weather)
+        }
+    }
+
+    private fun observeViewmodel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    when (uiState) {
+                        is WeatherUiState.Loading -> {
+                            (requireActivity() as MainActivity).showLoading()
+                            binding.errorContainer.visibility = View.GONE
+                            binding.weatherStatus.visibility = View.GONE
+                            binding.tvTemperature.visibility = View.GONE
+                            binding.tvCondition.visibility = View.GONE
+                            binding.tvFeelsLike.visibility = View.GONE
+                            binding.topBar.visibility = View.GONE
+                        }
+
+                        is WeatherUiState.Success -> {
+                            (requireActivity() as MainActivity).hideLoading()
+                            val weather = uiState.data
+
+                            binding.topBar.setLocation(weather.name)
+                            binding.tvTemperature.text = getString(
+                                R.string.temperature,
+                                weather.main.temp.roundToInt()
+                            )
+
+                            binding.tvCondition.text =
+                                weather.weather.firstOrNull()?.description.orEmpty()
+
+                            binding.tvFeelsLike.text = getString(
+                                R.string.tv_feels_like,
+                                weather.main.feelsLike.roundToInt()
+                            )
+
+
+                            binding.weatherStatus.setStat1(
+                                getString(
+                                    R.string.feels_like
+                                ),
+                                "${weather.main.feelsLike.roundToInt()}°"
+
+                            )
+
+                            binding.weatherStatus.setStat2(
+                                getString(
+                                    R.string.humidity
+                                ),
+                                "${weather.main.humidity}%"
+                            )
+                            binding.weatherStatus.setStat3(
+                                getString(
+                                    R.string.wind
+                                ),
+                                "${(weather.wind.speed * 3.6).roundToInt()} km/h"
+                            )
+                            binding.errorContainer.visibility = View.GONE
+                            binding.topBar.visibility = View.VISIBLE
+                            binding.tvTemperature.visibility = View.VISIBLE
+                            binding.tvCondition.visibility = View.VISIBLE
+                            binding.tvFeelsLike.visibility = View.VISIBLE
+                            binding.weatherStatus.visibility = View.VISIBLE
+
+                        }
+
+                        is WeatherUiState.Error -> {
+                            (requireActivity() as MainActivity).hideLoading()
+                            binding.weatherStatus.visibility = View.GONE
+                            binding.tvErrorMessage.text = mapErrorMessage(uiState.message)
+                            binding.errorContainer.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     override fun onStop() {
         super.onStop()
         fusedLocationClient.removeLocationUpdates(locationCallback)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+        _binding = null
+    }
+
 }
 

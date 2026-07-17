@@ -19,17 +19,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.weather.designsystem.xml.WeatherBottomNavView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/bottom_nav_colors"
-        app:itemTextColor="@color/bottom_nav_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        android:background="@color/very_dark_blue"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
