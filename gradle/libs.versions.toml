@@ -43,6 +43,8 @@ glide-core = { group = "com.github.bumptech.glide", name = "glide", version.ref 
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 
 weatherfeed-design-system = { module = "com.github.veronezzi:weatherfeed-design-system", version.ref = "weatherfeed-design-system" }
+
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

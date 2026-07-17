@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val repository: WeatherRepository
+
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<WeatherUiState>(WeatherUiState.Loading)
     val uiState = _uiState.asStateFlow()
