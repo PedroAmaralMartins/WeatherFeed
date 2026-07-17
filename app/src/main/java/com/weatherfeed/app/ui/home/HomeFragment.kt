@@ -96,9 +96,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observeViewmodel()
     }
 
-        observeViewModel()
-    }
-
     private fun checkLocationPermission() {
         val hasFine = ContextCompat.checkSelfPermission(
             requireContext(),
@@ -214,6 +211,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             binding.tvCondition.visibility = View.GONE
                             binding.tvFeelsLike.visibility = View.GONE
                             binding.topBar.visibility = View.GONE
+                            binding.ivWeatherIcon.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
@@ -233,6 +231,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 R.string.tv_feels_like,
                                 weather.main.feelsLike.roundToInt()
                             )
+
+                            val conditionCode = weather.weather.firstOrNull()?.icon.orEmpty()
+                            binding.ivWeatherIcon.setImageResource(
+                                WeatherConditionIcons.fromOpenWeather(conditionCode)
+                            )
+                            binding.ivWeatherIcon.contentDescription =
+                                weather.weather.firstOrNull()?.description
 
 
                             binding.weatherStatus.setStat1(
@@ -260,6 +265,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             binding.tvTemperature.visibility = View.VISIBLE
                             binding.tvCondition.visibility = View.VISIBLE
                             binding.tvFeelsLike.visibility = View.VISIBLE
+                            binding.ivWeatherIcon.visibility = View.VISIBLE
                             binding.weatherStatus.visibility = View.VISIBLE
 
                         }

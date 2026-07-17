@@ -44,7 +44,6 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 
 weatherfeed-design-system = { module = "com.github.veronezzi:weatherfeed-design-system", version.ref = "weatherfeed-design-system" }
 
-androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
