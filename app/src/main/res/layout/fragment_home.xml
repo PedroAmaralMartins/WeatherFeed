@@ -106,11 +106,11 @@
             android:textColor="@color/white"
             android:textSize="16sp"/>
 
-        <com.weather.designsystem.xml.WeatherBottomNavView
+        <com.weather.designsystem.xml.WeatherButtonView
             android:id="@+id/btnRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_bottom"
+            android:layout_marginTop="@dimen/weather_spacing_md"
             android:text="@string/btn_error_message"/>
     </LinearLayout>
 
