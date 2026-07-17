@@ -16,7 +16,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.bumptech.glide.Glide
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -207,7 +206,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             Toast.makeText(
                                 requireContext(),
-                                uiState.message.message ?: text,
+                                 text,
                                 Toast.LENGTH_SHORT
                             ).show()
 

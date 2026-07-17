@@ -30,7 +30,8 @@ android {
         if (localPropertiesFile.exists()) {
             properties.load(FileInputStream(localPropertiesFile))
         }
-        val rawKey = properties.getProperty("WEATHER_API_KEY") ?: "CHAVE_NAO_ENCONTRADA"
+        val rawKey = properties.getProperty("WEATHER_API_KEY")
+            ?: throw GradleException("WEATHER_API_KEY não encontrada no local.properties")
 
         buildConfigField("String", "WEATHER_API_KEY", "\"$rawKey\"")
     }
