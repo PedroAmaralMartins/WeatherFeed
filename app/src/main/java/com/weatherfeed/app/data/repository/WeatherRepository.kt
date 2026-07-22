@@ -22,7 +22,7 @@ class WeatherRepository(
 
     suspend fun getForecast(lat: Double, lon: Double): Result<ForecastResponse> {
         return try {
-            Result.success(api.getForecast(lat, lon))
+            Result.success(api.getForecast(lat, lon,))
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {

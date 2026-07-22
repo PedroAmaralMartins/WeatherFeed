@@ -19,7 +19,7 @@ interface WeatherApiService {
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("units") units: String = "metric",
-        @Query("cnt") count:Int
+        @Query("cnt") count: Int = 5
     ):
             ForecastResponse
 
