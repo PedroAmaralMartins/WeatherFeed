@@ -18,9 +18,16 @@ data class DailyForecast(
 )
 
 private const val DEFAULT_ICON = "01d"
-val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
 
 object ForecastUtils {
+
+    private val PT_BR = Locale.Builder()
+        .setLanguage("pt")
+        .setRegion("BR")
+        .build()
+    private val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
     fun groupByDay(item: List<ForecastItem>): List<DailyForecast> {
         return item.groupBy {
             it.dtTxt.substring(0, 10)
@@ -44,32 +51,23 @@ object ForecastUtils {
 
 
     fun formatDayName(dateString: String): String {
-        val prBrLocale = Locale.Builder()
-            .setLanguage("pt")
-            .setRegion("BR")
-            .build()
-
         val date = LocalDate.parse(dateString)
         val today = LocalDate.now()
 
         return if (date == today) {
             "Hoje"
         } else {
-            date.dayOfWeek.getDisplayName(TextStyle.SHORT, prBrLocale)
+            date.dayOfWeek.getDisplayName(TextStyle.SHORT, PT_BR)
                 .replace(".", "")
                 .replaceFirstChar { it.uppercase() }
         }
     }
 
     fun formatShortDate(dateString: String): String {
-        val locale = Locale.Builder()
-            .setLanguage("pt")
-            .setRegion("BR")
-            .build()
-
         return LocalDate.parse(dateString)
-            .format(DateTimeFormatter.ofPattern("dd MMM", locale))
+            .format(DateTimeFormatter.ofPattern("dd MMM", PT_BR))
             .replace(".", "")
+            .replaceFirstChar { it.uppercase() }
     }
 }
 
