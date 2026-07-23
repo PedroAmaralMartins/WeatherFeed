@@ -64,10 +64,12 @@ object ForecastUtils {
     }
 
     fun formatShortDate(dateString: String): String {
-        return LocalDate.parse(dateString)
-            .format(DateTimeFormatter.ofPattern("dd MMM", PT_BR))
-            .replace(".", "")
-            .replaceFirstChar { it.uppercase() }
+        val d = LocalDate.parse(dateString)
+        val month = d.month.getDisplayName(TextStyle.SHORT, PT_BR)
+            .replace(".","")
+            .replaceFirstChar {it.uppercase() }
+        return "${d.dayOfMonth} $month"
+
     }
 }
 
