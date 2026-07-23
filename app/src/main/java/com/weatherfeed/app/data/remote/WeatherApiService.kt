@@ -18,7 +18,8 @@ interface WeatherApiService {
     suspend fun getForecast(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("units") units: String = "metric"
+        @Query("units") units: String = "metric",
+        @Query("cnt") count: Int = 40
     ):
             ForecastResponse
 

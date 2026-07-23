@@ -25,7 +25,6 @@ import com.google.android.gms.location.Priority
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
-import com.weatherfeed.app.data.model.WeatherResponse
 import com.weatherfeed.app.databinding.FragmentHomeBinding
 import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
