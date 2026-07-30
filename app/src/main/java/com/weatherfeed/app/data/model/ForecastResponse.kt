@@ -9,6 +9,8 @@ data class ForecastResponse(
 
 data class ForecastItem(
     val dt: Long,
+    @SerializedName("dt_txt")
+    val dtTxt: String,
     val main: ForecastMain,
     val weather: List<WeatherDesc>
 )
