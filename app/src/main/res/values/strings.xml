@@ -15,4 +15,6 @@
     <string name="preview_temperature">25°C</string>
     <string name="preview_condition">Ensolarado</string>
     <string name="preview_feels_like">Sensação térmica: 27°C</string>
+    <string name="next_few_days">Próximos dias</string>
+    <string name="five_day_forecast">Previsao de 5 dias</string>
 </resources>
