@@ -15,7 +15,7 @@ class ForecastViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
 
-    private val uiState = _uiState.asStateFlow()
+     val uiState = _uiState.asStateFlow()
 
     fun loadForecast(lat: Double, lon: Double) {
         viewModelScope.launch {
@@ -27,7 +27,7 @@ class ForecastViewModel(
                 }
                 .onFailure {
                     _uiState.value =
-                        ForecastUiState.Error(it.message ?: "Erro ao carregar previsão")
+                        ForecastUiState.Error(it)
                 }
         }
     }
@@ -36,9 +36,9 @@ class ForecastViewModel(
 sealed class ForecastUiState {
     object Loading : ForecastUiState()
 
-    data class Success(val data: List<DailyForecast>) : ForecastUiState()
+    data class Success(val days: List<DailyForecast>) : ForecastUiState()
 
-    data class Error(val message: String) : ForecastUiState()
+    data class Error(val message: Throwable) : ForecastUiState()
 }
 
 class ForecastViewModelFactory(
