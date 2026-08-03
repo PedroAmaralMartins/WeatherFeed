@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/weather_background_deep">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/weather_text_headline"
+        android:layout_marginStart="@dimen/weather_spacing_lg"
+        android:layout_marginTop="@dimen/weather_spacing_lg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.weather.designsystem.xml.WeatherSearchBarView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/weather_spacing_lg"
+        android:layout_marginTop="@dimen/weather_spacing_lg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/weather_spacing_lg"
+        android:layout_marginTop="@dimen/weather_spacing_md"
+        android:text="@string/twelve_results"
+        android:textAllCaps="true"
+        android:textSize="@dimen/weather_text_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_cities"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/weather_spacing_lg"
+        android:layout_marginTop="@dimen/weather_spacing_sm"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:itemCount="12"
+        tools:listitem="@layout/item_weather_city_row" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

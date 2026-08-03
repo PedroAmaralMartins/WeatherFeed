@@ -15,4 +15,6 @@
     <string name="preview_temperature">25°C</string>
     <string name="preview_condition">Ensolarado</string>
     <string name="preview_feels_like">Sensação térmica: 27°C</string>
+    <string name="search">Buscar</string>
+    <string name="twelve_results">12 Resultados</string>
 </resources>
