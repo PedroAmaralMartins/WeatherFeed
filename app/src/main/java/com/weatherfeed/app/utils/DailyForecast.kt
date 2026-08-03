@@ -42,7 +42,7 @@ object ForecastUtils {
                 shortDate = formatShortDate(date),
                 tempMax = entries.maxOf { it.main.tempMax },
                 tempMin = entries.minOf { it.main.tempMin },
-                icon = midEntry.weather.firstOrNull()?.icon ?: DEFAULT_ICON,
+                icon = midEntry.weather.firstOrNull()?.description ?:"",
                 description = midEntry.weather[0].description
             )
         }
