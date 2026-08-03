@@ -3,18 +3,22 @@ package com.weatherfeed.app.ui.forecast
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentForecastBinding
+import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
 
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     private val adapter = ForecastAdapter()
 
+    private val viewModel: ForecastViewModel by viewModels {
+        ForecastViewModelFactory(AppContainer.repository)
+    }
     private lateinit var prefsManager: PrefsManager
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
@@ -39,7 +43,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                 viewModel.uiState.collect { state ->
                     when (state) {
                         is ForecastUiState.Loading -> {
-                            binding.progressBar.visibility = view.visibility
+                            binding.progressBar.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.GONE
 
                         }
@@ -53,8 +57,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                         }
 
                         is ForecastUiState.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            binding.tvErrorMessage.visibility = view.visibility
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.tvErrorMessage.visibility = View.VISIBLE
                         }
                     }
                 }

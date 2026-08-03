@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/twilight_aura">
+    android:background="@color/weather_background_deep">
 
     <TextView
         android:id="@+id/tvnext_few_days"
@@ -13,9 +13,7 @@
         android:layout_marginTop="@dimen/weather_spacing_lg"
         android:visibility="gone"
         android:text="@string/next_few_days"
-        android:textAllCaps="true"
-        android:textColor="@color/sapphire_glimmer"
-        android:textSize="@dimen/weather_text_label"
+        style="@style/WeatherText.SectionLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,8 +23,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:text="@string/five_day_forecast"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_28sp"
+        style="@style/WeatherText.Headline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvnext_few_days" />
 
@@ -58,8 +55,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:text="@string/error_loading_weather"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_28sp"
+        style="@style/WeatherText.Headline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
