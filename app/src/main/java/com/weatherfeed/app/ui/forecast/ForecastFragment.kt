@@ -43,7 +43,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                 viewModel.uiState.collect { state ->
                     when (state) {
                         is ForecastUiState.Loading -> {
-                            binding.progressBar.visibility = View.GONE
+                            binding.progressBar.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.GONE
                             binding.tvnextFewDays.visibility = View.GONE
                             binding.tvfiveDayForecast.visibility = View.GONE
