@@ -42,13 +42,12 @@ object ForecastUtils {
                 shortDate = formatShortDate(date),
                 tempMax = entries.maxOf { it.main.tempMax },
                 tempMin = entries.minOf { it.main.tempMin },
-                icon = midEntry.weather.firstOrNull()?.description ?:"",
-                description = midEntry.weather[0].description
+                icon = midEntry.weather.firstOrNull()?.icon ?: DEFAULT_ICON,
+                description = midEntry.weather.firstOrNull()?.description ?:""
             )
         }
             .take(5)
     }
-
 
     fun formatDayName(dateString: String): String {
         val date = LocalDate.parse(dateString)
