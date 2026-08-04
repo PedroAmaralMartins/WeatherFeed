@@ -8,13 +8,11 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_search_tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/weather_text_headline"
+        style="@style/WeatherText.Headline"
         android:layout_marginStart="@dimen/weather_spacing_lg"
         android:layout_marginTop="@dimen/weather_spacing_lg"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,17 +26,15 @@
         android:layout_marginTop="@dimen/weather_spacing_lg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_search_tittle" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_results_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/weather_spacing_lg"
         android:layout_marginTop="@dimen/weather_spacing_md"
-        android:text="@string/twelve_results"
-        android:textAllCaps="true"
-        android:textSize="@dimen/weather_text_title"
+        style="@style/WeatherText.SectionLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
@@ -52,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_results_count"
         tools:itemCount="12"
         tools:listitem="@layout/item_weather_city_row" />
 
