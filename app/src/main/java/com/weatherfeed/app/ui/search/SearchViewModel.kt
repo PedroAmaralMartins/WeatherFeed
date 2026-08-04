@@ -3,7 +3,7 @@ package com.weatherfeed.app.ui.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.weatherfeed.app.data.model.WeatherResponse
+import com.weatherfeed.app.data.model.GeocodingResponse
 import com.weatherfeed.app.data.repository.WeatherRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,7 +72,7 @@ sealed interface SearchUiState {
 
     data object Loading : SearchUiState
 
-    data class Success(val data: WeatherResponse) : SearchUiState
+    data class Success(val cities: List<GeocodingResponse>) : SearchUiState
 
     data class Error(val message: Throwable) : SearchUiState
 }

@@ -1,6 +1,7 @@
 package com.weatherfeed.app.data.repository
 
 import com.weatherfeed.app.data.model.ForecastResponse
+import com.weatherfeed.app.data.model.GeocodingResponse
 import com.weatherfeed.app.data.model.WeatherResponse
 import com.weatherfeed.app.data.remote.WeatherApiService
 import kotlinx.coroutines.CancellationException
@@ -30,7 +31,7 @@ class WeatherRepository(
         }
     }
 
-    suspend fun searchCity(cityName: String): Result<WeatherResponse> {
+    suspend fun searchCity(cityName: String): Result<List<GeocodingResponse>> {
         return try {
             Result.success(api.searchCity(cityName))
         } catch (e: CancellationException) {
