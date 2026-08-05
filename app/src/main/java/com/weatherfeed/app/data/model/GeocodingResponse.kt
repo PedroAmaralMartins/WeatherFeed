@@ -5,4 +5,5 @@ data class GeocodingResponse(
     val lat: Double,
     val lon: Double,
     val country: String,
+    val state: String? = null
 )
