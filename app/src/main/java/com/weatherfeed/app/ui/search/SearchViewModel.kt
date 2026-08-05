@@ -51,7 +51,13 @@ class SearchViewModel(
                     }
                     _uiState.value = SearchUiState.Loading
                     repository.searchCity(query)
-                        .onSuccess { _uiState.value = SearchUiState.Success(it) }
+                        .onSuccess { cities ->
+                            _uiState.value = if (cities.isEmpty()) {
+                                SearchUiState.Empty
+                            } else {
+                                SearchUiState.Success(cities)
+                            }
+                        }
                         .onFailure { _uiState.value = SearchUiState.Error(it) }
                 }
         }
@@ -69,6 +75,7 @@ sealed interface SearchUiState {
 
     data object Loading : SearchUiState
 
+    data object Empty: SearchUiState
     data class Success(val cities: List<GeocodingResponse>) : SearchUiState
 
     data class Error(val message: Throwable) : SearchUiState

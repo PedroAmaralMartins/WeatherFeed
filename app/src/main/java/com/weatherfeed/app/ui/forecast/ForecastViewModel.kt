@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 class ForecastViewModel(
     private val repository: WeatherRepository
 ) : ViewModel() {
+
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
 
      val uiState = _uiState.asStateFlow()
