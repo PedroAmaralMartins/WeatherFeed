@@ -48,3 +48,4 @@ weatherfeed-design-system = { module = "com.github.veronezzi:weatherfeed-design-
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
+

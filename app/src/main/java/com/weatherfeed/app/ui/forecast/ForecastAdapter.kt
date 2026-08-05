@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.databinding.ItemForecastDayBinding
+import com.weatherfeed.app.utils.DailyForecast
 
-class ForecastAdapter : ListAdapter<MockForecastItem, ForecastAdapter.ViewHolder>(DiffCallback) {
+class ForecastAdapter : ListAdapter<DailyForecast, ForecastAdapter.ViewHolder>(DiffCallback) {
 
-    inner class ViewHolder(val binding: ItemForecastDayBinding) :
+    class ViewHolder(val binding: ItemForecastDayBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -27,24 +28,24 @@ class ForecastAdapter : ListAdapter<MockForecastItem, ForecastAdapter.ViewHolder
         holder.binding.weatherForecastRowView.bind(
             dayName = item.dayName,
             date = item.date,
-            conditionIcon = WeatherConditionIcons.fromOpenWeather(item.iconCode),
+            conditionIcon = WeatherConditionIcons.fromOpenWeather(item.icon),
             conditionLabel = item.description,
             tempMax = "${item.tempMax.toInt()}°",
             tempMin = "${item.tempMin.toInt()}°"
         )
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MockForecastItem>() {
+    companion object DiffCallback : DiffUtil.ItemCallback<DailyForecast>() {
         override fun areItemsTheSame(
-            oldItem: MockForecastItem,
-            newItem: MockForecastItem
+            oldItem: DailyForecast,
+            newItem: DailyForecast
         ): Boolean {
             return oldItem.date == newItem.date
         }
 
         override fun areContentsTheSame(
-            oldItem: MockForecastItem,
-            newItem: MockForecastItem
+            oldItem: DailyForecast,
+            newItem: DailyForecast
         ): Boolean {
             return oldItem == newItem
         }
