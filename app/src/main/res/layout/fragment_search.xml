@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/weather_spacing_lg"
         android:layout_marginTop="@dimen/weather_spacing_md"
+        tools:text="12 RESULTADOS"
         style="@style/WeatherText.SectionLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
