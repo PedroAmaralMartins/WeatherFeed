@@ -18,7 +18,8 @@
     <string name="search">Buscar</string>
     <string name="next_few_days">Próximos dias</string>
     <string name="five_day_forecast">Previsão de 5 dias</string>
-
+    <string name="search_no_results">Nenhuma cidade foi encontrada</string>
+    <string name="error_loading_city">Erro ao carregar a cidade</string>
     <plurals name="search_results_count">
         <item quantity="one">%1$d resultado</item>
         <item quantity="other">%1$d resultados</item>
