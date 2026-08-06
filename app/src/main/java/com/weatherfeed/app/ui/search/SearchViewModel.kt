@@ -66,17 +66,12 @@ class SearchViewModel(
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
     }
-
 }
 
 sealed interface SearchUiState {
-
     data object Idle : SearchUiState
-
     data object Loading : SearchUiState
-
-    data object Empty: SearchUiState
+    data object Empty : SearchUiState
     data class Success(val cities: List<GeocodingResponse>) : SearchUiState
-
     data class Error(val message: Throwable) : SearchUiState
 }

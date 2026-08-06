@@ -4,6 +4,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+    alias(libs.plugins.navigation.safeargs)
+
 }
 
 android {
@@ -74,4 +77,5 @@ dependencies {
     implementation(libs.glide.core)
     implementation(libs.play.services.location)
     implementation(libs.weatherfeed.design.system)
+
 }
