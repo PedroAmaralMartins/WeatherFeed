@@ -16,9 +16,14 @@ class ForecastViewModel(
 
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
 
-     val uiState = _uiState.asStateFlow()
+    val uiState = _uiState.asStateFlow()
 
-    fun loadForecast(lat: Double, lon: Double) {
+    private var alreadyLoaded = false
+
+    fun loadForecast(lat: Double, lon: Double, force: Boolean = false) {
+        if (alreadyLoaded && !force) return
+        alreadyLoaded = true
+
         viewModelScope.launch {
             _uiState.value = ForecastUiState.Loading
             repository.getForecast(lat, lon)
