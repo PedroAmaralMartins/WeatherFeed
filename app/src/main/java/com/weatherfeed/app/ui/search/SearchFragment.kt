@@ -55,7 +55,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         }
 
                         is SearchUiState.Loading -> {
-                            binding.tvResultsCount.visibility = View.VISIBLE
+                            binding.tvResultsCount.visibility = View.GONE
                             binding.rvCities.visibility = View.GONE
                         }
 

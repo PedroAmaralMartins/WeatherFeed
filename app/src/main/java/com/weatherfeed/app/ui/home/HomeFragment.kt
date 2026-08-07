@@ -97,17 +97,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onResume()
 
         checkSavedLocationOrFetchGPS()
+        checkLocationPermission()
     }
 
     private fun checkSavedLocationOrFetchGPS() {
-        val lat = prefsManager.lastLatitude
-        val lon = prefsManager.lastLongitude
-
-        if (lat != 0.0 && lon != 0.0) {
-            viewModel.loadWeather(lat, lon)
+        if (prefsManager.hasLocation()) {
+            viewModel.loadWeather(prefsManager.lastLatitude, prefsManager.lastLongitude)
         } else {
             checkLocationPermission()
         }
+
     }
 
     private fun checkLocationPermission() {
