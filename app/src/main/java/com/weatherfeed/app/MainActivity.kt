@@ -50,12 +50,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-    }
 }

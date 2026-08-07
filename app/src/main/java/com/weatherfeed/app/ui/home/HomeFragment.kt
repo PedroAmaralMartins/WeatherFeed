@@ -23,7 +23,6 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.weather.designsystem.WeatherConditionIcons
-import com.weatherfeed.app.MainActivity
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentHomeBinding
 import com.weatherfeed.app.utils.AppContainer
@@ -203,7 +202,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.uiState.collect { uiState ->
                     when (uiState) {
                         is WeatherUiState.Loading -> {
-                            (requireActivity() as MainActivity).showLoading()
+                            binding.progressBar.visibility = View.VISIBLE
                             binding.errorContainer.visibility = View.GONE
                             binding.weatherStatus.visibility = View.GONE
                             binding.tvTemperature.visibility = View.GONE
@@ -214,7 +213,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         }
 
                         is WeatherUiState.Success -> {
-                            (requireActivity() as MainActivity).hideLoading()
+
                             val weather = uiState.data
 
                             binding.topBar.setLocation(weather.name)
@@ -259,6 +258,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 ),
                                 "${(weather.wind.speed * 3.6).roundToInt()} km/h"
                             )
+                            binding.progressBar.visibility = View.GONE
                             binding.errorContainer.visibility = View.GONE
                             binding.topBar.visibility = View.VISIBLE
                             binding.tvTemperature.visibility = View.VISIBLE
@@ -270,7 +270,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         }
 
                         is WeatherUiState.Error -> {
-                            (requireActivity() as MainActivity).hideLoading()
+                            binding.progressBar.visibility = View.GONE
                             binding.weatherStatus.visibility = View.GONE
                             binding.tvErrorMessage.text = mapErrorMessage(uiState.message)
                             binding.errorContainer.visibility = View.VISIBLE
