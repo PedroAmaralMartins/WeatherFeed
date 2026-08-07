@@ -32,16 +32,21 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         prefsManager = PrefsManager(requireContext())
 
-
-        val lat = prefsManager.lastLatitude
-        val lon = prefsManager.lastLongitude
-        viewModel.loadForecast(lat, lon)
+        if (prefsManager.hasLocation()) {
+            viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
+        } else {
+                viewModel.onNoLocation()
+        }
 
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     when (state) {
+                        is ForecastUiState.NoLocation -> {
+                            binding.progressBar.visibility = View.GONE
+                            binding.tvErrorMessage.text = getString(R.string.no_location)
+                        }
                         is ForecastUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.GONE

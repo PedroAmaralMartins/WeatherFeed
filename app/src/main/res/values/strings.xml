@@ -18,6 +18,7 @@
     <string name="search">Buscar</string>
     <string name="next_few_days">Próximos dias</string>
     <string name="five_day_forecast">Previsão de 5 dias</string>
+    <string name="no_location">Abra a aba Clima para detectarmos sua localização.</string>
 
     <plurals name="search_results_count">
         <item quantity="one">%1$d resultado</item>
