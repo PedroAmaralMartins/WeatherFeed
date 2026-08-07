@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.weatherfeed.app.databinding.ActivityMainBinding
+import androidx.navigation.navOptions
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(destinationId: Int) {
-        val options = androidx.navigation.navOptions {
+        val options = navOptions {
             popUpTo(navController.graph.startDestinationId) { saveState = true }
             launchSingleTop = true
             restoreState = true
