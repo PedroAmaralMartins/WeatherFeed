@@ -32,10 +32,13 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         prefsManager = PrefsManager(requireContext())
 
-
-        val lat = prefsManager.lastLatitude
-        val lon = prefsManager.lastLongitude
-        viewModel.loadForecast(lat, lon)
+        if (prefsManager.hasLocation()) {
+            viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.tvErrorMessage.visibility = View.VISIBLE
+            binding.tvErrorMessage.text = getString(R.string.no_location)
+        }
 
 
         viewLifecycleOwner.lifecycleScope.launch {
