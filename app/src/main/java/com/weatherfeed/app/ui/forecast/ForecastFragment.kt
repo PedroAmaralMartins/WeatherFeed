@@ -35,7 +35,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         val lat = prefsManager.lastLatitude
         val lon = prefsManager.lastLongitude
-        viewModel.loadForecast(lat, lon)
+        viewModel.loadForecast(lat, lon, false)
 
 
         viewLifecycleOwner.lifecycleScope.launch {

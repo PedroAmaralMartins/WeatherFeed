@@ -18,11 +18,11 @@ class ForecastViewModel(
 
     val uiState = _uiState.asStateFlow()
 
-    private var alreadyCarry = false
+    private var alreadyLoaded = false
 
-    fun loadForecast(lat: Double, lon: Double, force: Boolean) {
-        if (alreadyCarry && !force) return
-        alreadyCarry = true
+    fun loadForecast(lat: Double, lon: Double, force: Boolean = false) {
+        if (alreadyLoaded && !force) return
+        alreadyLoaded = true
 
         viewModelScope.launch {
             _uiState.value = ForecastUiState.Loading
