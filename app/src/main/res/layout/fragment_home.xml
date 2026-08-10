@@ -21,58 +21,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:src="@drawable/ic_sun"
         android:contentDescription="@string/description_iv"
+        android:src="@drawable/ic_sun"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
     <TextView
         android:id="@+id/tvTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:gravity="center"
-        tools:text="@string/preview_temperature"
         android:textColor="@color/white"
         android:textSize="@dimen/weather_text_display"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivWeatherIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/ivWeatherIcon"
+        tools:text="@string/preview_temperature" />
 
     <TextView
         android:id="@+id/tvCondition"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/preview_condition"
-        android:textSize="@dimen/weather_text_title"
         android:textColor="@color/weather_text_primary"
+        android:textSize="@dimen/weather_text_title"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTemperature" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
+        tools:text="@string/preview_condition" />
 
     <TextView
         android:id="@+id/tvFeelsLike"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/preview_feels_like"
-        android:textSize="@dimen/weather_text_body"
         android:textColor="@color/blue_70"
+        android:textSize="@dimen/weather_text_body"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCondition" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCondition"
+        tools:text="@string/preview_feels_like" />
 
     <com.weather.designsystem.xml.WeatherStatCardView
         android:id="@+id/weather_Status"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike" />
@@ -81,9 +81,9 @@
         android:id="@+id/errorContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +93,9 @@
             android:id="@+id/ivError"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:contentDescription="@string/error_loading_iv"
             android:src="@drawable/ic_weather_alert"
-            app:tint="@color/weather_text_secondary"
-            android:contentDescription="@string/error_loading_iv"/>
+            app:tint="@color/weather_text_secondary" />
 
         <TextView
             android:id="@+id/tv_error_message"
@@ -105,17 +105,27 @@
             android:gravity="center"
             android:text="@string/error_loading_weather"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <com.weather.designsystem.xml.WeatherButtonView
             android:id="@+id/btnRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/weather_spacing_md"
-            android:text="@string/btn_error_message"/>
+            android:text="@string/btn_error_message" />
+
     </LinearLayout>
 
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
