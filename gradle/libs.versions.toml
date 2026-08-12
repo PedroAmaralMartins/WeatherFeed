@@ -48,6 +48,5 @@ weatherfeed-design-system = { module = "com.github.veronezzi:weatherfeed-design-
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 
 
