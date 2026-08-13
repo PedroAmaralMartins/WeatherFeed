@@ -1,0 +1,86 @@
+[33m526f77c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfix/resolving-conflicts-from-PR13[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/fix/resolving-conflicts-from-PR13[m[33m, [m[1;32mmaster[m[33m)[m Merge pull request #13 from PedroAmaralMartins/feature/loading_weather_icon_with_glide
+[33mda407e6[m[33m ([m[1;31morigin/feature/loading_weather_icon_with_glide[m[33m)[m Merge branch 'master' into feature/loading_weather_icon_with_glide
+[33m76deb56[m Merge pull request #12 from PedroAmaralMartins/feature/-home-screen-layout
+[33m80b2cf6[m[33m ([m[1;31morigin/feature/-home-screen-layout[m[33m, [m[1;32mfeature/-home-screen-layout[m[33m)[m The line @GET("data/2.5/direct") was reverted.
+[33m0b83fea[m[33m ([m[1;32mfeature/loading_weather_icon_with_glide[m[33m)[m The text displayed to the user in case of a problem has been adjusted. And the fallback has been readjusted.
+[33m4a8d365[m The endpoint was readjusted, and the bottun design system was also changed.
+[33m6350008[m The API has been updated to version 1.3.0 and Glide has been removed from HomeFragment.
+[33m70843a0[m Improvements were made to the XML home_fragment by implementing <com.weather.designsystem.xml.WeatherBottomNavView. and changing the ic_warning_error and deleting the image, replacing it with ic_weather_alert.
+[33m4c91bf5[m The onDestroy function was changed to onDestroyView(), and the error state was adjusted.
+[33md183d07[m The main_activity and fragment_home XML files were adjusted. The last hardcoded UI strings were moved to <strings>.xml.
+[33m06c7c2f[m Adjustments were made to the PR to configure the icon.
+[33m93ca534[m The calligraphy was readjusted.
+[33m42fd63a[m The PR adjustments to the layout were made, and the necessary hotfixes were also applied.
+[33mf0b289a[m The weather icon was loaded using Glide.
+[33m720a53a[m The home screen fragment has been readjusted.
+[33me9dbbbd[m The visual layout of the main screen was created.
+[33mc1408a1[m Merge pull request #11 from PedroAmaralMartins/feature/home_viewmodel_with_stateflow
+[33m12e72e7[m[33m ([m[1;31morigin/feature/home_viewmodel_with_stateflow[m[33m)[m Merge branch 'master' into feature/home_viewmodel_with_stateflow
+[33m1b1ff61[m Merge pull request #10 from PedroAmaralMartins/feature/get_location_with_FusedLocationProvider
+[33maef3d8b[m[33m ([m[1;31morigin/feature/get_location_with_FusedLocationProvider[m[33m)[m Merge branch 'master' into feature/get_location_with_FusedLocationProvider
+[33mffc56d0[m Merge pull request #9 from PedroAmaralMartins/feature/localization-at-runtime
+[33m87bf023[m[33m ([m[1;31morigin/feature/localization-at-runtime[m[33m)[m Merge branch 'master' into feature/localization-at-runtime
+[33mbfa9f55[m Merge pull request #8 from PedroAmaralMartins/feature/-splash-screen-with-animated-logo
+[33m10d262a[m[33m ([m[1;32mfeature/home_viewmodel_with_stateflow[m[33m)[m The code improvements have been made.
+[33m34b83e4[m The stateFlow implementation has been completed in the repository.
+[33m95b24e7[m[33m ([m[1;32mfeature/localization-at-runtime[m[33m)[m The callback logic was adjusted.
+[33m20560e1[m[33m ([m[1;31morigin/feature/-splash-screen-with-animated-logo[m[33m, [m[1;32mfeature/-splash-screen-with-animated-logo[m[33m)[m The contentDescription implementation has been completed.
+[33m763900a[m readjusted.
+[33m5d190a4[m corrections made to homeFragment
+[33md8f70df[m corrections made.
+[33m1455575[m corrections made.
+[33mb9c8efb[m The necessary adjustments have been made.
+[33mb18da80[m The configuration was completed in HomeFragment.
+[33m40d8196[m made settings.
+[33m238ef31[m done in response to requests from the PR.
+[33m1a40d92[m Adjustments were made to the splash screen.
+[33m246b20d[m Improvements were made to the code.
+[33m2c176fc[m Adjustments were made to the splash screen.
+[33m45338a1[m Adjustments made.
+[33m7809ce4[m The implementation of location services using FusedLocationProvider was completed.
+[33m418e29e[m improvements to homeFragment.
+[33m353b575[m Removed weather_Dimens.
+[33m42bd25c[m Removed imports and colors.
+[33mff35848[m binding fix.
+[33mb290d0f[m corrections made.
+[33m8298835[m added lib and using
+[33mbc755d8[m correcting the text of the fun howPermissionDeniedMessage
+[33m8cddfe3[m Location permission configured.
+[33m1740faf[m The splash screen with an animated logo has been configured.
+[33mf808f7b[m Merge pull request #7 from PedroAmaralMartins/featura/navigation-component
+[33mb51ea7b[m[33m ([m[1;31morigin/featura/navigation-component[m[33m, [m[1;32mfeatura/navigation-component[m[33m)[m resolving conflicts with navigation components and master.
+[33m968c7fb[m Merge remote-tracking branch 'origin/master' into featura/navigation-component
+[33me4bc95f[m Merge pull request #6 from PedroAmaralMartins/feature/creat-weather-repository
+[33m165d341[m adjusted indentation.
+[33m4259e18[m[33m ([m[1;31morigin/feature/creat-weather-repository[m[33m, [m[1;32mfeature/creat-weather-repository[m[33m)[m Adjustment to the retrofit configuration.
+[33m064e4b4[m change made.
+[33mbbd5747[m code improvements.
+[33m73eff68[m code improvements.
+[33mfabc031[m The repository has been fixed.
+[33mb22a8c2[m Indentation fixed and hardcoded.
+[33m53086ab[m The changes were made and the icons were added.
+[33madbd34e[m Made the corrections
+[33mac461c2[m component configuration done.
+[33me4f9288[m configured repository.
+[33ma2af59c[m[33m ([m[1;32mfeature/animated-logo-splash-screen[m[33m)[m Merge pull request #5 from PedroAmaralMartins/feature/creating-a-Retrofit-data-layer
+[33m9e7b664[m[33m ([m[1;31morigin/feature/creating-a-Retrofit-data-layer[m[33m)[m Merge branch 'master' into feature/creating-a-Retrofit-data-layer
+[33m0f43917[m Merge pull request #4 from PedroAmaralMartins/feature/get-api-key
+[33m3308a79[m Merge pull request #3 from PedroAmaralMartins/mvvm-package-structure
+[33m562fb39[m Merge pull request #2 from PedroAmaralMartins/feature/configure-depencies
+[33m4c1bf08[m retrofitted data.
+[33me0a7746[m[33m ([m[1;31morigin/feature/configure-depencies[m[33m, [m[1;32mfeature/configure-depencies[m[33m)[m corrections made
+[33m9470c78[m[33m ([m[1;31morigin/feature/get-api-key[m[33m, [m[1;32mfeature/get-api-key[m[33m)[m fixed fallback
+[33m47fa066[m made corrections.
+[33med9b32c[m made corrections.
+[33m9b3adea[m Merge branch 'mvvm-package-structure' into feature/get-api-key
+[33m80d71df[m Merge branch 'feature/configure-depencies' into feature/get-api-key
+[33me25e609[m[33m ([m[1;31morigin/mvvm-package-structure[m[33m, [m[1;32mmvvm-package-structure[m[33m)[m made corrections.
+[33m4487193[m Merge branch 'feature/configure-depencies' into mvvm-package-structure
+[33m348f0fb[m made corrections
+[33m10e1870[m API key obtained and configured.
+[33m72d7397[m Merge branch 'mvvm-package-structure' into feature/get-api-key
+[33mf53a7e3[m Merge branch 'refs/heads/feature/configure-depencies' into feature/get-api-key
+[33m10771eb[m The MVVM package structure was created.
+[33mdcbad41[m configured the dependencies
+[33md59e80f[m[33m ([m[1;31morigin/feature/create-project[m[33m, [m[1;32mfeature/create-project[m[33m)[m teste
+[33m6ee42ef[m[33m ([m[1;32mfeature/create-repository[m[33m)[m Initial commit

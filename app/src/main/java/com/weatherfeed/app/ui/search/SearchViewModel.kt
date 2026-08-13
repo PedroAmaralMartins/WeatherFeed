@@ -78,5 +78,5 @@ sealed interface SearchUiState {
     data object Empty: SearchUiState
     data class Success(val cities: List<GeocodingResponse>) : SearchUiState
 
-    data class Error(val message: Throwable) : SearchUiState
+    data class Error(val throwable: Throwable) : SearchUiState
 }

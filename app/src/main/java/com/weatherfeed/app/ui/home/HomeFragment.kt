@@ -25,7 +25,6 @@ import com.google.android.gms.location.Priority
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentHomeBinding
-import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
@@ -48,7 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var prefsManager: PrefsManager
 
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(AppContainer.repository)
+        HomeViewModel.Factory
     }
 
     private val locationCallback = object : LocationCallback() {
@@ -272,7 +271,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         is WeatherUiState.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.weatherStatus.visibility = View.GONE
-                            binding.tvErrorMessage.text = mapErrorMessage(uiState.message)
+                            binding.tvErrorMessage.text = mapErrorMessage(uiState.throwable)
                             binding.errorContainer.visibility = View.VISIBLE
                         }
                     }
