@@ -9,7 +9,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentForecastBinding
-import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
 
@@ -17,7 +16,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     private val adapter = ForecastAdapter()
 
     private val viewModel: ForecastViewModel by viewModels {
-        ForecastViewModelFactory(AppContainer.repository)
+        ForecastViewModel.Factory
     }
     private lateinit var prefsManager: PrefsManager
     private var _binding: FragmentForecastBinding? = null
@@ -32,16 +31,22 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         prefsManager = PrefsManager(requireContext())
 
-
-        val lat = prefsManager.lastLatitude
-        val lon = prefsManager.lastLongitude
-        viewModel.loadForecast(lat, lon, false)
+        if (prefsManager.hasLocation()) {
+            viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
+        } else {
+                viewModel.onNoLocation()
+        }
 
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     when (state) {
+                        is ForecastUiState.NoLocation -> {
+                            binding.progressBar.visibility = View.GONE
+                            binding.tvErrorMessage.visibility = View.VISIBLE
+                            binding.tvErrorMessage.text = getString(R.string.no_location)
+                        }
                         is ForecastUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.GONE
