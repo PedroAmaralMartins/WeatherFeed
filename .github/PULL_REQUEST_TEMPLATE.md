@@ -4,6 +4,14 @@
 
 Fecha a TMOB-XXX.
 
+## Screenshot
+
+<!--
+Se a mudança aparece na tela, coloque uma imagem. Arraste o arquivo aqui que o GitHub sobe sozinho.
+Se mudou algo que já existia, vale antes e depois.
+Se não muda nada visual (CI, refatoração, configuração), escreva "não se aplica" e siga.
+-->
+
 ## Como testar
 
 <!-- Passo a passo para quem revisa reproduzir. Ex: abra a aba 5 Dias sem ter passado pela Clima -->
