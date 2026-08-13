@@ -24,6 +24,7 @@ class ForecastViewModel(
         }
     }
 
+
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
 
     val uiState = _uiState.asStateFlow()
@@ -47,10 +48,15 @@ class ForecastViewModel(
                 }
         }
     }
+    fun onNoLocation() {
+        _uiState.value = ForecastUiState.NoLocation
+    }
 }
 
 sealed class ForecastUiState {
     object Loading : ForecastUiState()
+
+    data object NoLocation : ForecastUiState()
 
     data class Success(val days: List<DailyForecast>) : ForecastUiState()
 
