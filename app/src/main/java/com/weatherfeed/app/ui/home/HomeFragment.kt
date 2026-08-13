@@ -89,9 +89,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 prefsManager.lastLongitude
             )
         }
-        checkLocationPermission()
-
         observeViewmodel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        checkSavedLocationOrFetchGPS()
+
+    }
+
+    private fun checkSavedLocationOrFetchGPS() {
+        if (prefsManager.hasLocation()) {
+            viewModel.loadWeather(prefsManager.lastLatitude, prefsManager.lastLongitude)
+        } else {
+            checkLocationPermission()
+        }
+
     }
 
     private fun checkLocationPermission() {
