@@ -84,7 +84,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                             binding.rvCities.visibility = View.GONE
                         }
                     }
-
                 }
             }
         }
