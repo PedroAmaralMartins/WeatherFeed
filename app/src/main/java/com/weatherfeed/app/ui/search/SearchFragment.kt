@@ -82,10 +82,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                             binding.tvResultsCount.visibility = View.VISIBLE
                             binding.tvResultsCount.text = mapErrorMessage(state.throwable)
                             binding.rvCities.visibility = View.GONE
-
                         }
                     }
-
                 }
             }
         }
