@@ -6,7 +6,7 @@
     <string name="app_name">WeatherFeed</string>
     <string name="location_permission_denied">Permissão de localização negada</string>
     <string name="btn_error_message">Tentar novamente</string>
-    <string name="tv_feels_like">Sensação térmica: %1$d°C</string>
+    <string name="tv_feels_like">Sensação térmica: %1$s</string>
     <string name="temperature">%1$d°</string>
     <string name="feels_like">Sensação</string>
     <string name="humidity">Umidade</string>
@@ -21,6 +21,7 @@
     <string name="no_location">Abra a aba Clima para detectarmos sua localização.</string>
     <string name="search_no_results">Nenhuma cidade foi encontrada</string>
     <string name="error_loading_city">Erro ao carregar a cidade</string>
+    <string name="unit_celsius">C</string>
     <plurals name="search_results_count">
         <item quantity="one">%1$d resultado</item>
         <item quantity="other">%1$d resultados</item>

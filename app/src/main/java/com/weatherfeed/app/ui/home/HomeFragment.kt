@@ -26,6 +26,7 @@ import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentHomeBinding
 import com.weatherfeed.app.utils.PrefsManager
+import com.weatherfeed.app.utils.TemperatureUtils
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -230,9 +231,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             val weather = uiState.data
 
                             binding.topBar.setLocation(weather.name)
-                            binding.tvTemperature.text = getString(
-                                R.string.temperature,
-                                weather.main.temp.roundToInt()
+                            binding.tvTemperature.text = TemperatureUtils.formatTemp(
+                                weather.main.temp, prefsManager.temperatureUnit
                             )
 
                             binding.tvCondition.text =
@@ -240,7 +240,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,
-                                weather.main.feelsLike.roundToInt()
+                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit)
                             )
 
                             val conditionCode = weather.weather.firstOrNull()?.icon.orEmpty()

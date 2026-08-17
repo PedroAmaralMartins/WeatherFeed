@@ -13,12 +13,13 @@ import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
 
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
-    private val adapter = ForecastAdapter()
 
     private val viewModel: ForecastViewModel by viewModels {
         ForecastViewModel.Factory
     }
     private lateinit var prefsManager: PrefsManager
+    private lateinit var adapter: ForecastAdapter
+
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
 
@@ -27,9 +28,11 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
         _binding = FragmentForecastBinding.bind(view)
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerview.adapter = adapter
 
         prefsManager = PrefsManager(requireContext())
+        adapter = ForecastAdapter(prefsManager.temperatureUnit)
+        binding.recyclerview.adapter = adapter
+
 
         if (prefsManager.hasLocation()) {
             viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
