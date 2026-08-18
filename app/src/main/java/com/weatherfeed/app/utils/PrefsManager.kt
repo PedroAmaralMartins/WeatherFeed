@@ -15,4 +15,8 @@ class PrefsManager(context: Context) {
 
     fun hasLocation(): Boolean =
         prefs.contains("last_latitude") && prefs.contains("last_longitude")
+
+    var isCelsius: Boolean
+        get() = prefs.getBoolean("is_celsius", true)
+        set(value) = prefs.edit().putBoolean("is_celsius", value).apply()
 }
