@@ -27,18 +27,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun setupTemperatureRow() {
         val toggle = WeatherTemperatureToggleView(requireContext())
-        toggle.setUnit(isCelsius = prefsManager.isCelsius)
+        toggle.setUnit(isCelsius = prefsManager.temperatureUnit == PrefsManager.UNIT_CELSIUS)
         toggle.setOnUnitChanged { isCelsius ->
-            prefsManager.isCelsius = isCelsius
+            prefsManager.temperatureUnit = if (isCelsius) PrefsManager.UNIT_CELSIUS else PrefsManager.UNIT_FAHRENHEIT
             toggle.setUnit(isCelsius)
         }
         binding.rowUnit.setTrailing(toggle)
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
+
+
+
 }

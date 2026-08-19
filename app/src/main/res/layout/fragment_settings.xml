@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/preferences"
-        android:layout_marginTop="@dimen/weather_radius_md"
+        android:layout_marginTop="@dimen/weather_spacing_md"
         android:layout_marginStart="@dimen/weather_radius_md"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:text="@string/settings"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/weather_radius_sm"
-        android:layout_marginStart="@dimen/weather_radius_md"
+        android:layout_marginTop="@dimen/weather_spacing_sm"
+        android:layout_marginStart="@dimen/weather_spacing_md"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_section_label" />
 
@@ -33,8 +33,8 @@
         android:id="@+id/row_unit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/weather_radius_md"
-        android:layout_marginHorizontal="@dimen/weather_radius_md"
+        android:layout_marginTop="@dimen/weather_spacing_md"
+        android:layout_marginHorizontal="@dimen/weather_spacing_md"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_screen_title" />
