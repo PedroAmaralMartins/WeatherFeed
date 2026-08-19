@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/preferences"
         android:layout_marginTop="@dimen/weather_spacing_md"
-        android:layout_marginStart="@dimen/weather_radius_md"
+        android:layout_marginStart="@dimen/weather_spacing_md"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
