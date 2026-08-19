@@ -231,7 +231,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             val weather = uiState.data
 
                             binding.topBar.setLocation(weather.name)
-                            binding.tvTemperature.text = TemperatureUtils.formatTemp(
+                            binding.tvTemperature.text = TemperatureUtils.formatTempWithUnit(
                                 weather.main.temp, prefsManager.temperatureUnit
                             )
 
@@ -253,10 +253,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.weatherStatus.setStat1(
                                 getString(
-                                    R.string.feels_like
-                                ),
-                                "${weather.main.feelsLike.roundToInt()}°"
-
+                                    R.string.feels_like),
+                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit)
                             )
 
                             binding.weatherStatus.setStat2(

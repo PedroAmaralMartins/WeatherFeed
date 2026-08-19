@@ -77,8 +77,13 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         }
     }
 
-    override fun onDestroyView() {
+    override fun onResume() {
+        super.onResume()
+        val currentUnit = prefsManager.temperatureUnit
+        adapter.updateUnit(currentUnit)
+    }
 
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

@@ -21,7 +21,6 @@
     <string name="no_location">Abra a aba Clima para detectarmos sua localização.</string>
     <string name="search_no_results">Nenhuma cidade foi encontrada</string>
     <string name="error_loading_city">Erro ao carregar a cidade</string>
-    <string name="unit_celsius">C</string>
     <plurals name="search_results_count">
         <item quantity="one">%1$d resultado</item>
         <item quantity="other">%1$d resultados</item>
