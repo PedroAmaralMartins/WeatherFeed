@@ -60,9 +60,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
+    implementation(libs.androidx.core.splashscreen)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
     implementation(libs.coroutines.android)
@@ -70,7 +70,6 @@ dependencies {
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation(libs.glide.core)
     implementation(libs.play.services.location)
     implementation(libs.weatherfeed.design.system)
 }
