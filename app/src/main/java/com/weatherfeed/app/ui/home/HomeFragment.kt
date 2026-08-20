@@ -233,7 +233,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             binding.topBar.setLocation(weather.name)
                             binding.tvTemperature.text = getString(
                                 R.string.temperature,
-                                weather.main.temp.roundToInt()
+                                TemperatureUtils.formatTemp(weather.main.temp , prefsManager.temperatureUnit, )
                             )
 
                             binding.tvCondition.text =
@@ -241,7 +241,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,
-                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit)
+                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit, true)
                             )
 
                             val conditionCode = weather.weather.firstOrNull()?.icon.orEmpty()
