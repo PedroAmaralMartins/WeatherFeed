@@ -30,7 +30,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         toggle.setUnit(isCelsius = prefsManager.temperatureUnit == PrefsManager.UNIT_CELSIUS)
         toggle.setOnUnitChanged { isCelsius ->
             prefsManager.temperatureUnit = if (isCelsius) PrefsManager.UNIT_CELSIUS else PrefsManager.UNIT_FAHRENHEIT
-            toggle.setUnit(isCelsius)
         }
         binding.rowUnit.setTrailing(toggle)
 
