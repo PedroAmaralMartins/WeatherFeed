@@ -231,9 +231,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             val weather = uiState.data
 
                             binding.topBar.setLocation(weather.name)
-                            binding.tvTemperature.text = getString(
-                                R.string.temperature,
-                                TemperatureUtils.formatTemp(weather.main.temp , prefsManager.temperatureUnit, )
+                            binding.tvTemperature.text = TemperatureUtils.formatTemp(
+                                weather.main.temp,
+                                prefsManager.temperatureUnit
                             )
 
                             binding.tvCondition.text =
@@ -241,7 +241,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,
-                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit, true)
+                                TemperatureUtils.formatTemp(
+                                    weather.main.feelsLike,
+                                    prefsManager.temperatureUnit,
+                                    true
+                                )
                             )
 
                             val conditionCode = weather.weather.firstOrNull()?.icon.orEmpty()
@@ -254,8 +258,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.weatherStatus.setStat1(
                                 getString(
-                                    R.string.feels_like),
-                                TemperatureUtils.formatTemp(weather.main.feelsLike, prefsManager.temperatureUnit)
+                                    R.string.feels_like
+                                ),
+                                TemperatureUtils.formatTemp(
+                                    weather.main.feelsLike,
+                                    prefsManager.temperatureUnit
+                                )
                             )
 
                             binding.weatherStatus.setStat2(

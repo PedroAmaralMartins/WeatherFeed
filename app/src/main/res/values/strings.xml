@@ -7,7 +7,6 @@
     <string name="location_permission_denied">Permissão de localização negada</string>
     <string name="btn_error_message">Tentar novamente</string>
     <string name="tv_feels_like">Sensação térmica: %1$s</string>
-    <string name="temperature">%1$s</string>
     <string name="feels_like">Sensação</string>
     <string name="humidity">Umidade</string>
     <string name="wind">Vento</string>
