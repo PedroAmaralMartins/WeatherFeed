@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.databinding.ItemForecastDayBinding
 import com.weatherfeed.app.utils.DailyForecast
+import com.weatherfeed.app.utils.TemperatureUtils
 
-class ForecastAdapter : ListAdapter<DailyForecast, ForecastAdapter.ViewHolder>(DiffCallback) {
+class ForecastAdapter(
+    private var unit: String
+) : ListAdapter<DailyForecast, ForecastAdapter.ViewHolder>(DiffCallback) {
 
     class ViewHolder(val binding: ItemForecastDayBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -30,9 +33,14 @@ class ForecastAdapter : ListAdapter<DailyForecast, ForecastAdapter.ViewHolder>(D
             date = item.date,
             conditionIcon = WeatherConditionIcons.fromOpenWeather(item.icon),
             conditionLabel = item.description,
-            tempMax = "${item.tempMax.toInt()}°",
-            tempMin = "${item.tempMin.toInt()}°"
+            tempMax = TemperatureUtils.formatTemp(item.tempMax,unit),
+            tempMin = TemperatureUtils.formatTemp(item.tempMin, unit)
         )
+    }
+
+    fun updateUnit(newUnit: String) {
+        unit = newUnit
+        notifyDataSetChanged()
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<DailyForecast>() {
