@@ -25,6 +25,4 @@ class PrefsManager(context: Context) {
     var temperatureUnit: String
         get() = prefs.getString(KEY_TEMPERATURE_UNIT, UNIT_CELSIUS) ?: UNIT_CELSIUS
         set(value) = prefs.edit().putString(KEY_TEMPERATURE_UNIT, value).apply()
-
-
 }
