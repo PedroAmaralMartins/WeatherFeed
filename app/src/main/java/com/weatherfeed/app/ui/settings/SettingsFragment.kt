@@ -27,6 +27,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun setupUI() {
         prefsManager = PrefsManager(requireContext())
+
         setupTemperatureRow()
         binding.tvAppVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
     }
@@ -47,6 +48,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onDestroyView()
         _binding = null
     }
+
 
 
 }
