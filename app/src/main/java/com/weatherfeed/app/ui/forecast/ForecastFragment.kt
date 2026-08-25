@@ -33,6 +33,13 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         adapter = ForecastAdapter(prefsManager.temperatureUnit)
         binding.recyclerview.adapter = adapter
 
+        binding.btnRetry.setOnClickListener {
+            viewModel.loadForecast(
+                prefsManager.lastLatitude,
+                prefsManager.lastLongitude,
+                true
+            )
+        }
 
         if (prefsManager.hasLocation()) {
             viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
@@ -49,6 +56,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                             binding.progressBar.visibility = View.GONE
                             binding.tvErrorMessage.visibility = View.VISIBLE
                             binding.tvErrorMessage.text = getString(R.string.no_location)
+                            binding.errorContainer.visibility = View.GONE
+                            binding.btnRetry.visibility = View.GONE
                         }
                         is ForecastUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
@@ -56,6 +65,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                             binding.tvnextFewDays.visibility = View.GONE
                             binding.tvfiveDayForecast.visibility = View.GONE
                             binding.recyclerview.visibility = View.GONE
+                            binding.btnRetry.visibility = View.GONE
+                            binding.errorContainer.visibility = View.GONE
 
                         }
 
@@ -64,12 +75,16 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                             binding.tvnextFewDays.visibility = View.VISIBLE
                             binding.tvfiveDayForecast.visibility = View.VISIBLE
                             binding.recyclerview.visibility = View.VISIBLE
+                            binding.btnRetry.visibility = View.GONE
+                            binding.errorContainer.visibility = View.GONE
                             adapter.submitList(state.days)
                         }
 
                         is ForecastUiState.Error -> {
                             binding.progressBar.visibility = View.GONE
+                            binding.errorContainer.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.VISIBLE
+                            binding.btnRetry.visibility = View.VISIBLE
                         }
                     }
                 }
