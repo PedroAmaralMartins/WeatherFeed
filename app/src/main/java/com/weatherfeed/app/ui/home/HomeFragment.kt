@@ -243,8 +243,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 R.string.tv_feels_like,
                                 TemperatureUtils.formatTempWithUnit(
                                     weather.main.feelsLike,
-                                    prefsManager.temperatureUnit,
-
+                                    prefsManager.temperatureUnit
                                 )
                             )
 
