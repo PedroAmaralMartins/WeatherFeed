@@ -54,9 +54,10 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                     when (state) {
                         is ForecastUiState.NoLocation -> {
                             binding.progressBar.visibility = View.GONE
+                            binding.errorContainer.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.VISIBLE
                             binding.tvErrorMessage.text = getString(R.string.no_location)
-                            binding.errorContainer.visibility = View.GONE
+
                             binding.btnRetry.visibility = View.GONE
                         }
                         is ForecastUiState.Loading -> {
