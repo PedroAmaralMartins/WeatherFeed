@@ -49,7 +49,7 @@ object ForecastUtils {
             .take(5)
     }
 
-    fun formatDayName(dateString: String): String {
+    private fun formatDayName(dateString: String): String {
         val date = LocalDate.parse(dateString)
         val today = LocalDate.now()
 
@@ -62,7 +62,7 @@ object ForecastUtils {
         }
     }
 
-    fun formatShortDate(dateString: String): String {
+    private fun formatShortDate(dateString: String): String {
         val d = LocalDate.parse(dateString)
         val month = d.month.getDisplayName(TextStyle.SHORT, PT_BR)
             .replace(".","")

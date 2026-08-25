@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentSearchBinding
+import com.weatherfeed.app.ui.factory.AppViewModelFactory
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -20,7 +21,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels {
-        SearchViewModel.Factory
+        AppViewModelFactory.Factory
     }
     private lateinit var prefsManager: PrefsManager
 
