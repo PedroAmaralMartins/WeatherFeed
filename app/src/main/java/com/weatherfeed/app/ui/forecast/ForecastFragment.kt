@@ -9,14 +9,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentForecastBinding
-import com.weatherfeed.app.ui.factory.AppViewModelFactory
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
 
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
     private val viewModel: ForecastViewModel by viewModels {
-        AppViewModelFactory.Factory
+        ForecastViewModel.Factory
     }
     private lateinit var prefsManager: PrefsManager
     private lateinit var adapter: ForecastAdapter

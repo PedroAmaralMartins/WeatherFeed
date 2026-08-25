@@ -1,8 +1,12 @@
 package com.weatherfeed.app.ui.forecast
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.weatherfeed.app.data.repository.WeatherRepository
+import com.weatherfeed.app.utils.AppContainer
 import com.weatherfeed.app.utils.ForecastUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,6 +15,14 @@ import kotlinx.coroutines.launch
 class ForecastViewModel(
     private val repository: WeatherRepository
 ) : ViewModel() {
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                ForecastViewModel(AppContainer.repository)
+            }
+        }
+    }
+
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
 
     val uiState = _uiState.asStateFlow()
@@ -34,6 +46,7 @@ class ForecastViewModel(
                 }
         }
     }
+
     fun onNoLocation() {
         _uiState.value = ForecastUiState.NoLocation
     }

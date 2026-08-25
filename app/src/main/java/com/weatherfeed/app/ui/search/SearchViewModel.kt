@@ -1,8 +1,12 @@
 package com.weatherfeed.app.ui.search
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.weatherfeed.app.data.repository.WeatherRepository
+import com.weatherfeed.app.utils.AppContainer
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +23,11 @@ class SearchViewModel(
 ) : ViewModel() {
 
     companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                SearchViewModel(AppContainer.repository)
+            }
+        }
         private const val SEARCH_DEBOUNCE_MS = 500L
     }
 

@@ -25,7 +25,6 @@ import com.google.android.gms.location.Priority
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentHomeBinding
-import com.weatherfeed.app.ui.factory.AppViewModelFactory
 import com.weatherfeed.app.utils.PrefsManager
 import com.weatherfeed.app.utils.TemperatureUtils
 import kotlinx.coroutines.TimeoutCancellationException
@@ -49,7 +48,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var prefsManager: PrefsManager
 
     private val viewModel: HomeViewModel by viewModels {
-        AppViewModelFactory.Factory
+        HomeViewModel.Factory
     }
 
     private val locationCallback = object : LocationCallback() {
