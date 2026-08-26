@@ -241,10 +241,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,
-                                TemperatureUtils.formatTemp(
+                                TemperatureUtils.formatTempWithUnit(
                                     weather.main.feelsLike,
-                                    prefsManager.temperatureUnit,
-                                    true
+                                    prefsManager.temperatureUnit
                                 )
                             )
 
