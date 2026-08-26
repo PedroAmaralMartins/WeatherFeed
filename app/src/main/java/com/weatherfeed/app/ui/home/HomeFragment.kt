@@ -86,7 +86,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.btnRetry.setOnClickListener {
             viewModel.loadWeather(
                 prefsManager.lastLatitude,
-                prefsManager.lastLongitude
+                prefsManager.lastLongitude,
             )
         }
         observeViewmodel()
