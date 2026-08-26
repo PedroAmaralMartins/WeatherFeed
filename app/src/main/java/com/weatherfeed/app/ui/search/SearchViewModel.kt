@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.weatherfeed.app.data.model.GeocodingResponse
 import com.weatherfeed.app.data.repository.WeatherRepository
 import com.weatherfeed.app.utils.AppContainer
 import kotlinx.coroutines.FlowPreview
@@ -29,7 +28,6 @@ class SearchViewModel(
                 SearchViewModel(AppContainer.repository)
             }
         }
-
         private const val SEARCH_DEBOUNCE_MS = 500L
     }
 
@@ -66,12 +64,4 @@ class SearchViewModel(
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query
     }
-}
-
-sealed interface SearchUiState {
-    data object Idle : SearchUiState
-    data object Loading : SearchUiState
-    data object Empty : SearchUiState
-    data class Success(val cities: List<GeocodingResponse>) : SearchUiState
-    data class Error(val throwable: Throwable) : SearchUiState
 }
