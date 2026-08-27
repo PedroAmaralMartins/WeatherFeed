@@ -21,24 +21,27 @@ class ForecastViewModel(
                 ForecastViewModel(AppContainer.repository)
             }
         }
+        private const val CACHE_DURATION_MS = 15 * 60 * 1000L
     }
 
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
-
     val uiState = _uiState.asStateFlow()
-
-    private var alreadyLoaded = false
+    private var lastLoadedAt: Long = 0
 
     fun loadForecast(lat: Double, lon: Double, force: Boolean = false) {
-        if (alreadyLoaded && !force) return
-        alreadyLoaded = true
+        val now = System.currentTimeMillis()
+        val cacheStillValid = (now - lastLoadedAt) < CACHE_DURATION_MS
 
+        if (!force && cacheStillValid && _uiState.value is ForecastUiState.Success) {
+            return
+        }
         viewModelScope.launch {
             _uiState.value = ForecastUiState.Loading
             repository.getForecast(lat, lon)
                 .onSuccess { response ->
                     val days = ForecastUtils.groupByDay(response.list)
                     _uiState.value = ForecastUiState.Success(days)
+                    lastLoadedAt = System.currentTimeMillis()
                 }
                 .onFailure {
                     _uiState.value =

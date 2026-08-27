@@ -3,6 +3,7 @@
     <string name="error_loading_weather">Erro ao carregar o clima</string>
     <string name="error_network">Erro de conexão. Verifique sua internet.</string>
     <string name="error_loading_iv">Erro ao carregar a imagem</string>
+    <string name="error_loading_forecast">Erro ao carregar a previsão</string>
     <string name="app_name">WeatherFeed</string>
     <string name="location_permission_denied">Permissão de localização negada</string>
     <string name="btn_error_message">Tentar novamente</string>

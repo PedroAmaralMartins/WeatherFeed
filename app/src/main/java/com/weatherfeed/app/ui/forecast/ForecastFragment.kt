@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +12,9 @@ import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentForecastBinding
 import com.weatherfeed.app.utils.PrefsManager
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
-
     private val viewModel: ForecastViewModel by viewModels {
         ForecastViewModel.Factory
     }
@@ -41,15 +42,8 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             )
         }
 
-        if (prefsManager.hasLocation()) {
-            viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
-        } else {
-                viewModel.onNoLocation()
-        }
-
-
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     when (state) {
                         is ForecastUiState.NoLocation -> {
@@ -60,6 +54,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
                             binding.btnRetry.visibility = View.GONE
                         }
+
                         is ForecastUiState.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.GONE
@@ -85,6 +80,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                             binding.progressBar.visibility = View.GONE
                             binding.errorContainer.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.VISIBLE
+                            binding.tvErrorMessage.text = mapErrorMessage(state.throwable)
                             binding.btnRetry.visibility = View.VISIBLE
                         }
                     }
@@ -92,11 +88,27 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             }
         }
     }
+    private fun mapErrorMessage(throwable: Throwable): String {
+        return if (throwable is IOException) {
+            getString(R.string.error_network)
+        } else {
+            getString(R.string.error_loading_forecast)
+        }
+    }
+
+    private fun fetchForecast() {
+        if (prefsManager.hasLocation()) {
+            viewModel.loadForecast(prefsManager.lastLatitude, prefsManager.lastLongitude)
+        } else {
+            viewModel.onNoLocation()
+        }
+    }
 
     override fun onResume() {
         super.onResume()
         val currentUnit = prefsManager.temperatureUnit
         adapter.updateUnit(currentUnit)
+        fetchForecast()
     }
 
     override fun onDestroyView() {
