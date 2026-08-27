@@ -1,4 +1,4 @@
-package com.weatherfeed.app.utils
+package com.weatherfeed.app.navigation
 
 interface BottomTabNavigator {
     fun navigateToTab(destinationId: Int)

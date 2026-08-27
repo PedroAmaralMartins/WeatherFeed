@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.weatherfeed.app.databinding.ActivityMainBinding
 import androidx.navigation.navOptions
-import com.weatherfeed.app.utils.BottomTabNavigator
+import com.weatherfeed.app.navigation.BottomTabNavigator
 
 
 class MainActivity : AppCompatActivity(), BottomTabNavigator {
