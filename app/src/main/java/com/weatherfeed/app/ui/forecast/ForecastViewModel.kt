@@ -21,13 +21,11 @@ class ForecastViewModel(
                 ForecastViewModel(AppContainer.repository)
             }
         }
-
-        private const val CACHE_DURATION_MS = 30 * 1000L
+        private const val CACHE_DURATION_MS = 15 * 60 * 1000L
     }
 
     private val _uiState = MutableStateFlow<ForecastUiState>(ForecastUiState.Loading)
     val uiState = _uiState.asStateFlow()
-
     private var lastLoadedAt: Long = 0
 
     fun loadForecast(lat: Double, lon: Double, force: Boolean = false) {

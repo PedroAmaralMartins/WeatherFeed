@@ -11,15 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentForecastBinding
 import com.weatherfeed.app.utils.PrefsManager
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class ForecastFragment : Fragment(R.layout.fragment_forecast) {
-    companion object {
-        private const val TIME = 60 * 1000L
-    }
-
     private val viewModel: ForecastViewModel by viewModels {
         ForecastViewModel.Factory
     }
@@ -85,21 +80,19 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
                             binding.progressBar.visibility = View.GONE
                             binding.errorContainer.visibility = View.VISIBLE
                             binding.tvErrorMessage.visibility = View.VISIBLE
+                            binding.tvErrorMessage.text = mapErrorMessage(state.throwable)
                             binding.btnRetry.visibility = View.VISIBLE
                         }
                     }
                 }
             }
         }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                fetchForecast()
-                while (isActive) {
-                    delay(TIME)
-                    fetchForecast()
-                }
-            }
+    }
+    private fun mapErrorMessage(throwable: Throwable): String {
+        return if (throwable is IOException) {
+            getString(R.string.error_network)
+        } else {
+            getString(R.string.error_loading_forecast)
         }
     }
 
@@ -115,6 +108,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
         super.onResume()
         val currentUnit = prefsManager.temperatureUnit
         adapter.updateUnit(currentUnit)
+        fetchForecast()
     }
 
     override fun onDestroyView() {
