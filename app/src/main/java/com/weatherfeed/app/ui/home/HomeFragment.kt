@@ -25,6 +25,7 @@ import com.google.android.gms.location.Priority
 import com.weather.designsystem.WeatherConditionIcons
 import com.weatherfeed.app.R
 import com.weatherfeed.app.databinding.FragmentHomeBinding
+import com.weatherfeed.app.utils.BottomTabNavigator
 import com.weatherfeed.app.utils.PrefsManager
 import com.weatherfeed.app.utils.TemperatureUtils
 import kotlinx.coroutines.TimeoutCancellationException
@@ -89,8 +90,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 prefsManager.lastLongitude,
             )
         }
+        binding.topBar.setOnSearchClick {
+            (activity as? BottomTabNavigator)?.navigateToTab(R.id.searchFragment)
+        }
         observeViewmodel()
     }
+
 
     override fun onResume() {
         super.onResume()
