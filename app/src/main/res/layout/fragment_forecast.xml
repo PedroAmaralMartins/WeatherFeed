@@ -65,7 +65,7 @@
         <TextView
             android:id="@+id/tvError_message"
             style="@style/WeatherText.Headline"
-            android:layout_marginStart="@dimen/weather_radius_md"
+            android:layout_marginStart="@dimen/weather_spacing_md"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/error_loading_weather" />
