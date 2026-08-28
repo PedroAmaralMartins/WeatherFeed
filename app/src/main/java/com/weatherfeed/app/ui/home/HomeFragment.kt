@@ -237,7 +237,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             )
 
                             binding.tvCondition.text =
-                                weather.weather.firstOrNull()?.description.orEmpty()
+                                weather.weather.firstOrNull()
+                                    ?.description
+                                    ?.replaceFirstChar { it.uppercase() }
+                                    .orEmpty()
 
                             binding.tvFeelsLike.text = getString(
                                 R.string.tv_feels_like,

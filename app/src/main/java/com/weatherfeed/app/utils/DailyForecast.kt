@@ -43,7 +43,10 @@ object ForecastUtils {
                 tempMax = entries.maxOf { it.main.tempMax },
                 tempMin = entries.minOf { it.main.tempMin },
                 icon = midEntry.weather.firstOrNull()?.icon ?: DEFAULT_ICON,
-                description = midEntry.weather.firstOrNull()?.description ?:""
+                description = midEntry.weather.firstOrNull()?.description
+                    ?.replaceFirstChar { it.uppercase() }
+                    ?: ""
+
             )
         }
             .take(5)
@@ -65,8 +68,8 @@ object ForecastUtils {
     private fun formatShortDate(dateString: String): String {
         val d = LocalDate.parse(dateString)
         val month = d.month.getDisplayName(TextStyle.SHORT, PT_BR)
-            .replace(".","")
-            .replaceFirstChar {it.uppercase() }
+            .replace(".", "")
+            .replaceFirstChar { it.uppercase() }
         return "${d.dayOfMonth} $month"
 
     }
