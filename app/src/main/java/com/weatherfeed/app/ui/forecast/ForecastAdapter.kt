@@ -30,7 +30,7 @@ class ForecastAdapter(
         val item = getItem(position)
         holder.binding.weatherForecastRowView.bind(
             dayName = item.dayName,
-            date = item.date,
+            date = item.shortDate,
             conditionIcon = WeatherConditionIcons.fromOpenWeather(item.icon),
             conditionLabel = item.description,
             tempMax = TemperatureUtils.formatTemp(item.tempMax,unit),
