@@ -10,9 +10,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.weatherfeed.app.databinding.ActivityMainBinding
 import androidx.navigation.navOptions
+import com.weatherfeed.app.navigation.BottomTabNavigator
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomTabNavigator {
+
+    override fun navigateToTab(destinationId: Int) {
+        navigateTo(destinationId)
+    }
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
