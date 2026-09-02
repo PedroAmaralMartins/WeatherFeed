@@ -221,14 +221,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.uiState.collect { uiState ->
                     when (uiState) {
                         is WeatherUiState.Loading -> {
+                            showContent(false)
                             binding.progressBar.visibility = View.VISIBLE
                             binding.errorContainer.visibility = View.GONE
-                            binding.weatherStatus.visibility = View.GONE
-                            binding.tvTemperature.visibility = View.GONE
-                            binding.tvCondition.visibility = View.GONE
-                            binding.tvFeelsLike.visibility = View.GONE
-                            binding.topBar.visibility = View.GONE
-                            binding.ivWeatherIcon.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
@@ -285,20 +280,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 ),
                                 "${(weather.wind.speed * 3.6).roundToInt()} km/h"
                             )
+                            showContent(true)
                             binding.progressBar.visibility = View.GONE
                             binding.errorContainer.visibility = View.GONE
-                            binding.topBar.visibility = View.VISIBLE
-                            binding.tvTemperature.visibility = View.VISIBLE
-                            binding.tvCondition.visibility = View.VISIBLE
-                            binding.tvFeelsLike.visibility = View.VISIBLE
-                            binding.ivWeatherIcon.visibility = View.VISIBLE
-                            binding.weatherStatus.visibility = View.VISIBLE
 
                         }
 
                         is WeatherUiState.Error -> {
+                            showContent(false)
                             binding.progressBar.visibility = View.GONE
-                            binding.weatherStatus.visibility = View.GONE
                             binding.tvErrorMessage.text = mapErrorMessage(uiState.throwable)
                             binding.errorContainer.visibility = View.VISIBLE
                         }
@@ -306,6 +296,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
+    }
+
+    private fun showContent(visible: Boolean) {
+        val visibility = if (visible) View.VISIBLE else View.GONE
+        binding.topBar.visibility = visibility
+        binding.ivWeatherIcon.visibility = visibility
+        binding.tvTemperature.visibility = visibility
+        binding.tvCondition.visibility = visibility
+        binding.tvFeelsLike.visibility = visibility
+        binding.weatherStatus.visibility = visibility
     }
 
     override fun onStop() {
