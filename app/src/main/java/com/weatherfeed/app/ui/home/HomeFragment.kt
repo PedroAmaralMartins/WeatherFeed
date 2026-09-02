@@ -217,8 +217,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     when (uiState) {
                         is WeatherUiState.Loading -> {
                             showContent(false)
-                            binding.progressBar.visibility = View.GONE
-                            binding.errorContainer.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.errorContainer.visibility = View.GONE
                         }
 
                         is WeatherUiState.Success -> {
