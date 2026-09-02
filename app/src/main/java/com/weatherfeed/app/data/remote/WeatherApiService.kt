@@ -11,7 +11,8 @@ interface WeatherApiService {
     suspend fun getCurrentWeather(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("units") units: String = "metric"
+        @Query("units") units: String = "metric",
+        @Query("lang") lang: String = "pt_br"
     ):
             WeatherResponse
 
@@ -20,7 +21,8 @@ interface WeatherApiService {
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
         @Query("units") units: String = "metric",
-        @Query("cnt") count: Int = 40
+        @Query("cnt") count: Int = 40,
+        @Query("lang") lang: String = "pt_br"
     ):
             ForecastResponse
 
