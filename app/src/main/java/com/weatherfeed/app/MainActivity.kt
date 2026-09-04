@@ -5,7 +5,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsCompat.Type
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.weatherfeed.app.databinding.ActivityMainBinding
@@ -39,10 +41,11 @@ class MainActivity : AppCompatActivity(), BottomTabNavigator {
                 bars.left,
                 bars.top,
                 bars.right,
-                bars.bottom
+                0
             )
-            insets
+            WindowInsetsCompat.CONSUMED
         }
+        windowsControler()
         configureNavigation()
     }
 
@@ -81,5 +84,10 @@ class MainActivity : AppCompatActivity(), BottomTabNavigator {
 
             binding.bottomNavigationView.setSelectedIndex(index)
         }
+    }
+
+    private fun  windowsControler() {
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.hide(Type.systemBars())
     }
 }
